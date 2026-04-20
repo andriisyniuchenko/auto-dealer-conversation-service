@@ -1,0 +1,17 @@
+# Virtual environment
+venv/
+
+# Environment variables
+.env
+
+# PyCharm
+.idea/
+
+# ChromaDB local data
+chroma_db/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
