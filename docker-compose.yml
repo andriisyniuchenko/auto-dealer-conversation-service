@@ -1,0 +1,38 @@
+services:
+  chatbot:
+    build: .
+    ports:
+      - "8001:8001"
+    env_file: .env
+    depends_on:
+      - postgres
+      - chromadb
+    volumes:
+      - .:/app
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: chatbot_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  chromadb:
+    image: chromadb/chroma
+    ports:
+      - "8002:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+
+volumes:
+  postgres_data:
+  chroma_data:
+
+networks:
+  default:
+    external: true
+    name: dealer_network
