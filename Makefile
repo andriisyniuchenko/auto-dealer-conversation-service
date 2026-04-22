@@ -1,4 +1,5 @@
-.PHONY: up down reset build db migrate migration logs
+.PHONY: up down reset build db migrate migration logs freeze
+
 up:
 	docker-compose up -d
 
@@ -14,6 +15,9 @@ build:
 db:
 	docker-compose up -d postgres
 
+demo:
+	docker-compose run --rm chatbot python scripts/seed_chromadb.py
+
 migrate:
 	alembic upgrade head
 
@@ -22,3 +26,6 @@ migration:
 
 logs:
 	docker-compose logs -f
+
+freeze:
+	pip freeze > requirements.txt
