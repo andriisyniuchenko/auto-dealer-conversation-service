@@ -1,9 +1,13 @@
 services:
-  chatbot:
+  web:
     build: .
     ports:
       - "8001:8001"
     env_file: .env
+    environment:
+      - DATABASE_URL=postgresql+psycopg2://postgres:postgres@postgres:5432/web_db
+      - CHROMA_HOST=chromadb
+      - CHROMA_PORT=8000
     depends_on:
       - postgres
       - chromadb
@@ -13,7 +17,7 @@ services:
   postgres:
     image: postgres:15
     environment:
-      POSTGRES_DB: chatbot_db
+      POSTGRES_DB: web_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:

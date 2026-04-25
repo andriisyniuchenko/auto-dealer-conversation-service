@@ -184,12 +184,13 @@ CRM_API_URL=http://localhost:8000
 ### Run with Docker
 
 ```bash
-make build       # Build and start all services
-make migrate     # Apply database migrations
-make demo        # Seed inventory into PostgreSQL and ChromaDB
+make build       # Build images
+make demo        # Start databases → run migrations → seed inventory → start web
 ```
 
 App available at: `http://localhost:8001`
+
+> **Note:** `docker-compose.yml` overrides `DATABASE_URL` and `CHROMA_HOST` for the container environment, so the app connects to internal Docker service names (`postgres`, `chromadb`) rather than `localhost`.
 
 ### Run Locally (without Docker)
 
@@ -208,13 +209,12 @@ uvicorn app.main:app --port 8001 --reload
 ### Makefile Commands
 
 ```bash
-make up                          # Start services in background
-make down                        # Stop services
-make reset                       # Full teardown including volumes
-make build                       # Rebuild and start
-make migrate                     # Run database migrations
+make up                          # Start all services in background
+make down                        # Stop containers and remove volumes
+make build                       # Rebuild Docker images
+make demo                        # Start DBs → migrate → seed → start web
+make migrate                     # Run migrations only (local dev)
 make migration msg="add table"   # Generate new Alembic migration
-make demo                        # Seed PostgreSQL + ChromaDB
 make logs                        # Stream container logs
 make freeze                      # Update requirements.txt
 ```
