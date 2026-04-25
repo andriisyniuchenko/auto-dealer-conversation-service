@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block title %}Galaxy Motors — Find Your Car{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section class="hero text-white text-center">
+  <div class="container">
+    <h1 class="display-5 fw-bold">Find Your Perfect Vehicle</h1>
+    <p class="lead">Explore our inventory and drive away today.</p>
+  </div>
+</section>
+
+<!-- Search Filter -->
+<section class="container my-5">
+  <div class="card shadow-sm">
+    <div class="card-body p-4">
+      <h5 class="card-title mb-4">Search Inventory</h5>
+      <form method="get" action="/">
+        <div class="row g-3">
+
+          <div class="col-md-2">
+            <label class="form-label">Condition</label>
+            <select name="condition" class="form-select">
+              <option value="">Any</option>
+              <option value="new" {% if filters.condition == "new" %}selected{% endif %}>New</option>
+              <option value="used" {% if filters.condition == "used" %}selected{% endif %}>Used</option>
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <label class="form-label">Year</label>
+            <select name="year" class="form-select">
+              <option value="">Any</option>
+              {% for y in range(2026, 1999, -1) %}
+              <option value="{{ y }}" {% if filters.year == y|string %}selected{% endif %}>{{ y }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <label class="form-label">Make</label>
+            <select name="make" class="form-select">
+              <option value="">Any</option>
+              {% for m in makes %}
+              <option value="{{ m }}" {% if filters.make == m %}selected{% endif %}>{{ m }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">Max Mileage</label>
+            <select name="max_mileage" class="form-select">
+              <option value="">Any</option>
+              <option value="20000" {% if filters.max_mileage == "20000" %}selected{% endif %}>Under 20,000</option>
+              <option value="40000" {% if filters.max_mileage == "40000" %}selected{% endif %}>Under 40,000</option>
+              <option value="60000" {% if filters.max_mileage == "60000" %}selected{% endif %}>Under 60,000</option>
+              <option value="80000" {% if filters.max_mileage == "80000" %}selected{% endif %}>Under 80,000</option>
+            </select>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">Max Price</label>
+            <select name="max_price" class="form-select">
+              <option value="">Any</option>
+              <option value="10000" {% if filters.max_price == "10000" %}selected{% endif %}>Under $10,000</option>
+              <option value="20000" {% if filters.max_price == "20000" %}selected{% endif %}>Under $20,000</option>
+              <option value="30000" {% if filters.max_price == "30000" %}selected{% endif %}>Under $30,000</option>
+              <option value="50000" {% if filters.max_price == "50000" %}selected{% endif %}>Under $50,000</option>
+            </select>
+          </div>
+
+        </div>
+        <div class="mt-4 d-flex gap-2">
+          <button type="submit" class="btn btn-danger px-4">Search</button>
+          <a href="/" class="btn btn-outline-secondary">Clear</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Results -->
+{% if searched %}
+<section class="container mb-5">
+  <h5 class="mb-3">{{ vehicles|length }} vehicle(s) found</h5>
+  {% if vehicles %}
+  <div class="row g-4">
+    {% for v in vehicles %}
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{ v.year }} {{ v.make }} {{ v.model }}</h5>
+          <p class="text-muted text-capitalize mb-1">{{ v.type }} &middot; {{ v.transmission }}</p>
+          <p class="mb-1"><i class="bi bi-speedometer2 me-1"></i>{{ "{:,}".format(v.mileage) }} miles</p>
+          <p class="mb-1"><i class="bi bi-palette me-1"></i>{{ v.color|capitalize }}</p>
+          <p class="mb-0 fw-bold text-danger fs-5">${{ "{:,.0f}".format(v.price) }}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="alert alert-secondary">No vehicles match your search. Try different filters.</div>
+  {% endif %}
+</section>
+{% endif %}
+
+{% endblock %}
