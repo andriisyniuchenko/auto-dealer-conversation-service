@@ -1,6 +1,6 @@
 import os
-from fastapi import APIRouter, Request, Depends, HTTPException
-from fastapi.responses import HTMLResponse
+from fastapi import APIRouter, Request, Depends
+from fastapi.responses import HTMLResponse, RedirectResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, distinct
 
@@ -34,10 +34,13 @@ def _get_vehicle_image(vehicle: Vehicle) -> str:
 def _apply_range(stmt, column, range_value: str):
     if not range_value:
         return stmt
-    if range_value.startswith("under_"):
-        return stmt.where(column <= int(range_value[6:]))
-    if range_value.startswith("over_"):
-        return stmt.where(column >= int(range_value[5:]))
+    try:
+        if range_value.startswith("under_"):
+            return stmt.where(column <= int(range_value[6:]))
+        if range_value.startswith("over_"):
+            return stmt.where(column >= int(range_value[5:]))
+    except ValueError:
+        pass
     return stmt
 
 
@@ -75,7 +78,7 @@ async def used_vehicles(request: Request, db: AsyncSession = Depends(get_db)):
 async def vehicle_detail(vehicle_id: str, request: Request, db: AsyncSession = Depends(get_db)):
     vehicle = await db.get(Vehicle, vehicle_id)
     if not vehicle:
-        raise HTTPException(status_code=404, detail="Vehicle not found")
+        return RedirectResponse(url="/")
     return templates.TemplateResponse(
         request=request,
         name="vehicle_detail.html",
