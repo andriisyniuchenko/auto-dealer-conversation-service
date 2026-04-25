@@ -28,26 +28,28 @@ def build_chroma_document(car: dict) -> str:
 def seed_postgres(inventory: list):
     db = SessionLocal()
     try:
-        if db.query(Vehicle).count() > 0:
-            print("PostgreSQL: already seeded, skipping.")
-            return
         for v in inventory:
-            db.add(Vehicle(
-                id=v["id"],
-                make=v["make"],
-                model=v["model"],
-                year=v["year"],
-                type=v["type"],
-                transmission=v["transmission"],
-                mileage=v["mileage"],
-                price=v["price"],
-                color=v["color"],
-                engine=v["engine"],
-                origin=v["origin"],
-                features=", ".join(v.get("features", [])),
-            ))
+            vehicle = db.get(Vehicle, v["id"])
+            if vehicle:
+                vehicle.condition = v["condition"]
+            else:
+                db.add(Vehicle(
+                    id=v["id"],
+                    make=v["make"],
+                    model=v["model"],
+                    year=v["year"],
+                    type=v["type"],
+                    transmission=v["transmission"],
+                    mileage=v["mileage"],
+                    price=v["price"],
+                    color=v["color"],
+                    engine=v["engine"],
+                    origin=v["origin"],
+                    features=", ".join(v.get("features", [])),
+                    condition=v["condition"],
+                ))
         db.commit()
-        print(f"PostgreSQL: seeded {len(inventory)} vehicles.")
+        print(f"PostgreSQL: upserted {len(inventory)} vehicles.")
     finally:
         db.close()
 

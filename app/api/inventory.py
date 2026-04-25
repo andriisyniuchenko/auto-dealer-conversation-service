@@ -10,6 +10,34 @@ from app.models.vehicle import Vehicle
 router = APIRouter()
 
 
+@router.get("/inventory/new", response_class=HTMLResponse)
+def new_vehicles(request: Request, db: Session = Depends(get_db)):
+    vehicles = db.query(Vehicle).filter(Vehicle.condition == "new").order_by(Vehicle.price).all()
+    return templates.TemplateResponse(
+        request=request,
+        name="vehicle_list.html",
+        context={
+            "title": "New Vehicles",
+            "subtitle": "Brand new 2026 models ready to drive off the lot.",
+            "vehicles": vehicles,
+        },
+    )
+
+
+@router.get("/inventory/used", response_class=HTMLResponse)
+def used_vehicles(request: Request, db: Session = Depends(get_db)):
+    vehicles = db.query(Vehicle).filter(Vehicle.condition == "used").order_by(Vehicle.price).all()
+    return templates.TemplateResponse(
+        request=request,
+        name="vehicle_list.html",
+        context={
+            "title": "Used Vehicles",
+            "subtitle": "Quality pre-owned vehicles at great prices.",
+            "vehicles": vehicles,
+        },
+    )
+
+
 @router.get("/", response_class=HTMLResponse)
 def index(
     request: Request,
@@ -24,10 +52,8 @@ def index(
 
     query = db.query(Vehicle)
 
-    if condition == "new":
-        query = query.filter(Vehicle.year >= 2021)
-    elif condition == "used":
-        query = query.filter(Vehicle.year < 2021)
+    if condition in ("new", "used"):
+        query = query.filter(Vehicle.condition == condition)
 
     if year:
         query = query.filter(Vehicle.year == int(year))
@@ -38,7 +64,9 @@ def index(
     if max_mileage:
         query = query.filter(Vehicle.mileage <= int(max_mileage))
 
-    if max_price:
+    if max_price == "60000+":
+        query = query.filter(Vehicle.price > 60000)
+    elif max_price:
         query = query.filter(Vehicle.price <= float(max_price))
 
     searched = any([condition, year, make, max_mileage, max_price])

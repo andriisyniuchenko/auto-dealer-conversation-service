@@ -18,3 +18,4 @@ class Vehicle(Base):
     engine = Column(String, nullable=False)
     origin = Column(String, nullable=False)
     features = Column(Text, nullable=False, default="")
+    condition = Column(String, nullable=False, default="used")

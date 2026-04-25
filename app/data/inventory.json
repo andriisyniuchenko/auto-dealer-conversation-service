@@ -11,7 +11,12 @@
     "color": "silver",
     "engine": "2.5L 4-cylinder",
     "origin": "japanese",
-    "features": ["backup camera", "bluetooth", "heated seats"]
+    "features": [
+      "backup camera",
+      "bluetooth",
+      "heated seats"
+    ],
+    "condition": "used"
   },
   {
     "id": "2",
@@ -25,7 +30,12 @@
     "color": "blue",
     "engine": "1.5L 4-cylinder",
     "origin": "japanese",
-    "features": ["apple carplay", "lane assist", "backup camera"]
+    "features": [
+      "apple carplay",
+      "lane assist",
+      "backup camera"
+    ],
+    "condition": "used"
   },
   {
     "id": "3",
@@ -39,7 +49,12 @@
     "color": "red",
     "engine": "2.5L 4-cylinder",
     "origin": "japanese",
-    "features": ["sunroof", "blind spot monitoring", "heated seats"]
+    "features": [
+      "sunroof",
+      "blind spot monitoring",
+      "heated seats"
+    ],
+    "condition": "used"
   },
   {
     "id": "4",
@@ -53,7 +68,12 @@
     "color": "white",
     "engine": "2.5L 4-cylinder",
     "origin": "japanese",
-    "features": ["backup camera", "bluetooth", "cruise control"]
+    "features": [
+      "backup camera",
+      "bluetooth",
+      "cruise control"
+    ],
+    "condition": "used"
   },
   {
     "id": "5",
@@ -67,7 +87,13 @@
     "color": "green",
     "engine": "2.5L 4-cylinder",
     "origin": "japanese",
-    "features": ["awd", "sunroof", "apple carplay", "heated seats"]
+    "features": [
+      "awd",
+      "sunroof",
+      "apple carplay",
+      "heated seats"
+    ],
+    "condition": "used"
   },
   {
     "id": "6",
@@ -81,7 +107,13 @@
     "color": "black",
     "engine": "1.5L turbo 4-cylinder",
     "origin": "japanese",
-    "features": ["awd", "backup camera", "heated seats", "bluetooth"]
+    "features": [
+      "awd",
+      "backup camera",
+      "heated seats",
+      "bluetooth"
+    ],
+    "condition": "used"
   },
   {
     "id": "7",
@@ -95,7 +127,13 @@
     "color": "gray",
     "engine": "3.5L V6 EcoBoost",
     "origin": "american",
-    "features": ["4wd", "towing package", "backup camera", "bluetooth"]
+    "features": [
+      "4wd",
+      "towing package",
+      "backup camera",
+      "bluetooth"
+    ],
+    "condition": "used"
   },
   {
     "id": "8",
@@ -109,7 +147,12 @@
     "color": "white",
     "engine": "1.5L turbo 4-cylinder",
     "origin": "american",
-    "features": ["backup camera", "bluetooth", "remote start"]
+    "features": [
+      "backup camera",
+      "bluetooth",
+      "remote start"
+    ],
+    "condition": "used"
   },
   {
     "id": "9",
@@ -123,7 +166,12 @@
     "color": "orange",
     "engine": "3.6L V6",
     "origin": "american",
-    "features": ["4wd", "removable doors", "off-road package"]
+    "features": [
+      "4wd",
+      "removable doors",
+      "off-road package"
+    ],
+    "condition": "used"
   },
   {
     "id": "10",
@@ -137,7 +185,12 @@
     "color": "red",
     "engine": "5.0L V8",
     "origin": "american",
-    "features": ["performance package", "bluetooth", "backup camera"]
+    "features": [
+      "performance package",
+      "bluetooth",
+      "backup camera"
+    ],
+    "condition": "used"
   },
   {
     "id": "11",
@@ -151,7 +204,12 @@
     "color": "black",
     "engine": "3.6L V6",
     "origin": "american",
-    "features": ["apple carplay", "backup camera", "heated seats"]
+    "features": [
+      "apple carplay",
+      "backup camera",
+      "heated seats"
+    ],
+    "condition": "used"
   },
   {
     "id": "12",
@@ -165,7 +223,13 @@
     "color": "white",
     "engine": "5.3L V8",
     "origin": "american",
-    "features": ["4wd", "third row seats", "backup camera", "heated seats"]
+    "features": [
+      "4wd",
+      "third row seats",
+      "backup camera",
+      "heated seats"
+    ],
+    "condition": "used"
   },
   {
     "id": "13",
@@ -179,7 +243,13 @@
     "color": "blue",
     "engine": "2.0L turbo 4-cylinder",
     "origin": "european",
-    "features": ["sunroof", "heated seats", "apple carplay", "lane assist"]
+    "features": [
+      "sunroof",
+      "heated seats",
+      "apple carplay",
+      "lane assist"
+    ],
+    "condition": "used"
   },
   {
     "id": "14",
@@ -193,7 +263,12 @@
     "color": "silver",
     "engine": "1.8L turbo 4-cylinder",
     "origin": "european",
-    "features": ["backup camera", "bluetooth", "heated seats"]
+    "features": [
+      "backup camera",
+      "bluetooth",
+      "heated seats"
+    ],
+    "condition": "used"
   },
   {
     "id": "15",
@@ -207,7 +282,14 @@
     "color": "gray",
     "engine": "2.0L turbo 4-cylinder",
     "origin": "european",
-    "features": ["awd", "sunroof", "apple carplay", "heated seats", "lane assist"]
+    "features": [
+      "awd",
+      "sunroof",
+      "apple carplay",
+      "heated seats",
+      "lane assist"
+    ],
+    "condition": "used"
   },
   {
     "id": "16",
@@ -221,7 +303,13 @@
     "color": "black",
     "engine": "2.0L turbo 4-cylinder",
     "origin": "european",
-    "features": ["sunroof", "heated seats", "blind spot monitoring", "backup camera"]
+    "features": [
+      "sunroof",
+      "heated seats",
+      "blind spot monitoring",
+      "backup camera"
+    ],
+    "condition": "used"
   },
   {
     "id": "17",
@@ -235,7 +323,14 @@
     "color": "white",
     "engine": "2.0L turbo 4-cylinder",
     "origin": "european",
-    "features": ["awd", "sunroof", "pilot assist", "heated seats", "apple carplay"]
+    "features": [
+      "awd",
+      "sunroof",
+      "pilot assist",
+      "heated seats",
+      "apple carplay"
+    ],
+    "condition": "used"
   },
   {
     "id": "18",
@@ -249,7 +344,14 @@
     "color": "gray",
     "engine": "2.0L turbo 4-cylinder",
     "origin": "european",
-    "features": ["awd", "sunroof", "heated seats", "apple carplay", "backup camera"]
+    "features": [
+      "awd",
+      "sunroof",
+      "heated seats",
+      "apple carplay",
+      "backup camera"
+    ],
+    "condition": "used"
   },
   {
     "id": "19",
@@ -263,7 +365,11 @@
     "color": "blue",
     "engine": "1.8L 4-cylinder",
     "origin": "korean",
-    "features": ["bluetooth", "backup camera"]
+    "features": [
+      "bluetooth",
+      "backup camera"
+    ],
+    "condition": "used"
   },
   {
     "id": "20",
@@ -277,7 +383,12 @@
     "color": "red",
     "engine": "2.0L 4-cylinder",
     "origin": "korean",
-    "features": ["bluetooth", "backup camera", "heated seats"]
+    "features": [
+      "bluetooth",
+      "backup camera",
+      "heated seats"
+    ],
+    "condition": "used"
   },
   {
     "id": "21",
@@ -291,7 +402,11 @@
     "color": "silver",
     "engine": "1.8L 4-cylinder",
     "origin": "japanese",
-    "features": ["bluetooth", "backup camera"]
+    "features": [
+      "bluetooth",
+      "backup camera"
+    ],
+    "condition": "used"
   },
   {
     "id": "22",
@@ -305,7 +420,12 @@
     "color": "orange",
     "engine": "1.5L 4-cylinder",
     "origin": "japanese",
-    "features": ["bluetooth", "backup camera", "magic seat"]
+    "features": [
+      "bluetooth",
+      "backup camera",
+      "magic seat"
+    ],
+    "condition": "used"
   },
   {
     "id": "23",
@@ -319,7 +439,11 @@
     "color": "white",
     "engine": "1.8L 4-cylinder",
     "origin": "japanese",
-    "features": ["bluetooth", "backup camera"]
+    "features": [
+      "bluetooth",
+      "backup camera"
+    ],
+    "condition": "used"
   },
   {
     "id": "24",
@@ -333,7 +457,11 @@
     "color": "black",
     "engine": "2.0L 4-cylinder",
     "origin": "japanese",
-    "features": ["bluetooth", "heated seats"]
+    "features": [
+      "bluetooth",
+      "heated seats"
+    ],
+    "condition": "used"
   },
   {
     "id": "25",
@@ -347,7 +475,15 @@
     "color": "white",
     "engine": "3.5L V6",
     "origin": "japanese",
-    "features": ["awd", "sunroof", "heated seats", "apple carplay", "blind spot monitoring", "backup camera"]
+    "features": [
+      "awd",
+      "sunroof",
+      "heated seats",
+      "apple carplay",
+      "blind spot monitoring",
+      "backup camera"
+    ],
+    "condition": "used"
   },
   {
     "id": "26",
@@ -361,7 +497,13 @@
     "color": "red",
     "engine": "electric",
     "origin": "american",
-    "features": ["autopilot", "over-the-air updates", "premium sound", "glass roof"]
+    "features": [
+      "autopilot",
+      "over-the-air updates",
+      "premium sound",
+      "glass roof"
+    ],
+    "condition": "used"
   },
   {
     "id": "27",
@@ -375,7 +517,14 @@
     "color": "black",
     "engine": "6.2L V8",
     "origin": "american",
-    "features": ["4wd", "third row seats", "heated seats", "sunroof", "apple carplay"]
+    "features": [
+      "4wd",
+      "third row seats",
+      "heated seats",
+      "sunroof",
+      "apple carplay"
+    ],
+    "condition": "used"
   },
   {
     "id": "28",
@@ -389,7 +538,14 @@
     "color": "gray",
     "engine": "2.0L turbo 4-cylinder",
     "origin": "european",
-    "features": ["awd", "sunroof", "heated seats", "sport chrono package", "backup camera"]
+    "features": [
+      "awd",
+      "sunroof",
+      "heated seats",
+      "sport chrono package",
+      "backup camera"
+    ],
+    "condition": "used"
   },
   {
     "id": "29",
@@ -403,7 +559,14 @@
     "color": "white",
     "engine": "3.5L V6 EcoBoost",
     "origin": "american",
-    "features": ["4wd", "third row seats", "massaging seats", "sunroof", "apple carplay"]
+    "features": [
+      "4wd",
+      "third row seats",
+      "massaging seats",
+      "sunroof",
+      "apple carplay"
+    ],
+    "condition": "used"
   },
   {
     "id": "30",
@@ -417,6 +580,673 @@
     "color": "blue",
     "engine": "3.5L V6",
     "origin": "japanese",
-    "features": ["awd", "third row seats", "sunroof", "heated seats", "apple carplay", "blind spot monitoring"]
+    "features": [
+      "awd",
+      "third row seats",
+      "sunroof",
+      "heated seats",
+      "apple carplay",
+      "blind spot monitoring"
+    ],
+    "condition": "used"
+  },
+  {
+    "id": "31",
+    "make": "Subaru",
+    "model": "Crosstrek",
+    "year": 2026,
+    "type": "suv",
+    "transmission": "automatic",
+    "mileage": 5,
+    "price": 26995,
+    "color": "crystal white",
+    "engine": "2.5L 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "apple carplay",
+      "android auto",
+      "eyesight driver assist",
+      "backup camera",
+      "bluetooth"
+    ]
+  },
+  {
+    "id": "32",
+    "make": "Subaru",
+    "model": "Crosstrek Premium",
+    "year": 2026,
+    "type": "suv",
+    "transmission": "automatic",
+    "mileage": 7,
+    "price": 29995,
+    "color": "magnetite gray",
+    "engine": "2.5L 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "apple carplay",
+      "android auto",
+      "eyesight driver assist",
+      "heated seats",
+      "backup camera",
+      "bluetooth"
+    ]
+  },
+  {
+    "id": "33",
+    "make": "Subaru",
+    "model": "Crosstrek Sport",
+    "year": 2026,
+    "type": "suv",
+    "transmission": "automatic",
+    "mileage": 6,
+    "price": 31995,
+    "color": "sapphire blue",
+    "engine": "2.5L 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "apple carplay",
+      "sport tuned suspension",
+      "18-inch wheels",
+      "eyesight driver assist",
+      "heated seats",
+      "backup camera"
+    ]
+  },
+  {
+    "id": "34",
+    "make": "Subaru",
+    "model": "Crosstrek Limited",
+    "year": 2026,
+    "type": "suv",
+    "transmission": "automatic",
+    "mileage": 8,
+    "price": 34995,
+    "color": "crimson red",
+    "engine": "2.5L 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "leather seats",
+      "sunroof",
+      "blind spot monitoring",
+      "apple carplay",
+      "eyesight driver assist",
+      "heated seats"
+    ]
+  },
+  {
+    "id": "35",
+    "make": "Subaru",
+    "model": "Crosstrek Wilderness",
+    "year": 2026,
+    "type": "suv",
+    "transmission": "automatic",
+    "mileage": 5,
+    "price": 35995,
+    "color": "autumn green",
+    "engine": "2.5L 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "off-road package",
+      "lifted suspension",
+      "all-terrain tires",
+      "apple carplay",
+      "eyesight driver assist"
+    ]
+  },
+  {
+    "id": "36",
+    "make": "Subaru",
+    "model": "Forester",
+    "year": 2026,
+    "type": "suv",
+    "transmission": "automatic",
+    "mileage": 6,
+    "price": 28995,
+    "color": "ice silver",
+    "engine": "2.5L 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "apple carplay",
+      "android auto",
+      "eyesight driver assist",
+      "backup camera",
+      "bluetooth"
+    ]
+  },
+  {
+    "id": "37",
+    "make": "Subaru",
+    "model": "Forester Premium",
+    "year": 2026,
+    "type": "suv",
+    "transmission": "automatic",
+    "mileage": 9,
+    "price": 31995,
+    "color": "crystal white",
+    "engine": "2.5L 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "apple carplay",
+      "heated seats",
+      "panoramic moonroof",
+      "eyesight driver assist",
+      "backup camera"
+    ]
+  },
+  {
+    "id": "38",
+    "make": "Subaru",
+    "model": "Forester Sport",
+    "year": 2026,
+    "type": "suv",
+    "transmission": "automatic",
+    "mileage": 7,
+    "price": 33995,
+    "color": "magnetite gray",
+    "engine": "2.5L 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "sport exterior",
+      "apple carplay",
+      "heated seats",
+      "18-inch wheels",
+      "eyesight driver assist",
+      "backup camera"
+    ]
+  },
+  {
+    "id": "39",
+    "make": "Subaru",
+    "model": "Forester Limited",
+    "year": 2026,
+    "type": "suv",
+    "transmission": "automatic",
+    "mileage": 5,
+    "price": 37995,
+    "color": "sapphire blue",
+    "engine": "2.5L 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "leather seats",
+      "sunroof",
+      "blind spot monitoring",
+      "apple carplay",
+      "heated seats",
+      "eyesight driver assist"
+    ]
+  },
+  {
+    "id": "40",
+    "make": "Subaru",
+    "model": "Forester Touring",
+    "year": 2026,
+    "type": "suv",
+    "transmission": "automatic",
+    "mileage": 8,
+    "price": 40995,
+    "color": "crimson red",
+    "engine": "2.5L 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "harman kardon audio",
+      "power tailgate",
+      "leather seats",
+      "sunroof",
+      "blind spot monitoring",
+      "apple carplay",
+      "heated seats"
+    ]
+  },
+  {
+    "id": "41",
+    "make": "Subaru",
+    "model": "Forester Wilderness",
+    "year": 2026,
+    "type": "suv",
+    "transmission": "automatic",
+    "mileage": 6,
+    "price": 38995,
+    "color": "autumn green",
+    "engine": "2.5L 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "off-road package",
+      "lifted suspension",
+      "all-terrain tires",
+      "apple carplay",
+      "eyesight driver assist",
+      "heated seats"
+    ]
+  },
+  {
+    "id": "42",
+    "make": "Subaru",
+    "model": "Outback",
+    "year": 2026,
+    "type": "wagon",
+    "transmission": "automatic",
+    "mileage": 5,
+    "price": 30995,
+    "color": "ice silver",
+    "engine": "2.5L 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "apple carplay",
+      "android auto",
+      "eyesight driver assist",
+      "backup camera",
+      "bluetooth"
+    ]
+  },
+  {
+    "id": "43",
+    "make": "Subaru",
+    "model": "Outback Premium",
+    "year": 2026,
+    "type": "wagon",
+    "transmission": "automatic",
+    "mileage": 7,
+    "price": 33995,
+    "color": "crystal white",
+    "engine": "2.5L 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "apple carplay",
+      "heated seats",
+      "blind spot monitoring",
+      "eyesight driver assist",
+      "backup camera"
+    ]
+  },
+  {
+    "id": "44",
+    "make": "Subaru",
+    "model": "Outback Sport XT",
+    "year": 2026,
+    "type": "wagon",
+    "transmission": "automatic",
+    "mileage": 9,
+    "price": 35995,
+    "color": "magnetite gray",
+    "engine": "2.4L turbo 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "sport tuned suspension",
+      "apple carplay",
+      "heated seats",
+      "18-inch wheels",
+      "eyesight driver assist"
+    ]
+  },
+  {
+    "id": "45",
+    "make": "Subaru",
+    "model": "Outback Limited",
+    "year": 2026,
+    "type": "wagon",
+    "transmission": "automatic",
+    "mileage": 6,
+    "price": 39995,
+    "color": "sapphire blue",
+    "engine": "2.5L 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "leather seats",
+      "sunroof",
+      "blind spot monitoring",
+      "apple carplay",
+      "heated seats",
+      "eyesight driver assist"
+    ]
+  },
+  {
+    "id": "46",
+    "make": "Subaru",
+    "model": "Outback Wilderness",
+    "year": 2026,
+    "type": "wagon",
+    "transmission": "automatic",
+    "mileage": 5,
+    "price": 41995,
+    "color": "autumn green",
+    "engine": "2.4L turbo 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "off-road package",
+      "lifted suspension",
+      "all-terrain tires",
+      "apple carplay",
+      "eyesight driver assist",
+      "heated seats"
+    ]
+  },
+  {
+    "id": "47",
+    "make": "Subaru",
+    "model": "Outback Touring XT",
+    "year": 2026,
+    "type": "wagon",
+    "transmission": "automatic",
+    "mileage": 8,
+    "price": 46995,
+    "color": "crimson red",
+    "engine": "2.4L turbo 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "harman kardon audio",
+      "power tailgate",
+      "leather seats",
+      "sunroof",
+      "blind spot monitoring",
+      "apple carplay",
+      "heated seats"
+    ]
+  },
+  {
+    "id": "48",
+    "make": "Subaru",
+    "model": "Solterra",
+    "year": 2026,
+    "type": "suv",
+    "transmission": "automatic",
+    "mileage": 6,
+    "price": 44995,
+    "color": "horizon blue",
+    "engine": "electric dual motor",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "dc fast charging",
+      "heat pump",
+      "apple carplay",
+      "eyesight driver assist",
+      "heated seats",
+      "backup camera"
+    ]
+  },
+  {
+    "id": "49",
+    "make": "Subaru",
+    "model": "Solterra Premium",
+    "year": 2026,
+    "type": "suv",
+    "transmission": "automatic",
+    "mileage": 5,
+    "price": 48995,
+    "color": "ice silver",
+    "engine": "electric dual motor",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "dc fast charging",
+      "heat pump",
+      "panoramic roof",
+      "apple carplay",
+      "eyesight driver assist",
+      "heated seats",
+      "blind spot monitoring"
+    ]
+  },
+  {
+    "id": "50",
+    "make": "Subaru",
+    "model": "Solterra Limited",
+    "year": 2026,
+    "type": "suv",
+    "transmission": "automatic",
+    "mileage": 7,
+    "price": 53995,
+    "color": "crystal white",
+    "engine": "electric dual motor",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "dc fast charging",
+      "heat pump",
+      "panoramic roof",
+      "leather seats",
+      "apple carplay",
+      "eyesight driver assist",
+      "heated seats",
+      "blind spot monitoring",
+      "harman kardon audio"
+    ]
+  },
+  {
+    "id": "51",
+    "make": "Subaru",
+    "model": "Trailseeker",
+    "year": 2026,
+    "type": "suv",
+    "transmission": "automatic",
+    "mileage": 5,
+    "price": 46995,
+    "color": "geyser blue",
+    "engine": "electric dual motor",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "dc fast charging",
+      "off-road package",
+      "apple carplay",
+      "eyesight driver assist",
+      "heated seats",
+      "backup camera"
+    ]
+  },
+  {
+    "id": "52",
+    "make": "Subaru",
+    "model": "Trailseeker XT",
+    "year": 2026,
+    "type": "suv",
+    "transmission": "automatic",
+    "mileage": 8,
+    "price": 52995,
+    "color": "magnetite gray",
+    "engine": "electric dual motor",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "dc fast charging",
+      "off-road package",
+      "panoramic roof",
+      "leather seats",
+      "apple carplay",
+      "eyesight driver assist",
+      "heated seats",
+      "blind spot monitoring"
+    ]
+  },
+  {
+    "id": "53",
+    "make": "Subaru",
+    "model": "Impreza",
+    "year": 2026,
+    "type": "sedan",
+    "transmission": "automatic",
+    "mileage": 6,
+    "price": 24995,
+    "color": "crimson red",
+    "engine": "2.0L 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "apple carplay",
+      "android auto",
+      "eyesight driver assist",
+      "backup camera",
+      "bluetooth"
+    ]
+  },
+  {
+    "id": "54",
+    "make": "Subaru",
+    "model": "Impreza Sport",
+    "year": 2026,
+    "type": "hatchback",
+    "transmission": "automatic",
+    "mileage": 5,
+    "price": 27995,
+    "color": "ice silver",
+    "engine": "2.0L 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "sport exterior",
+      "apple carplay",
+      "eyesight driver assist",
+      "heated seats",
+      "18-inch wheels",
+      "backup camera"
+    ]
+  },
+  {
+    "id": "55",
+    "make": "Subaru",
+    "model": "WRX",
+    "year": 2026,
+    "type": "sedan",
+    "transmission": "manual",
+    "mileage": 7,
+    "price": 33995,
+    "color": "crystal white",
+    "engine": "2.4L turbo 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "sport tuned suspension",
+      "apple carplay",
+      "eyesight driver assist",
+      "heated seats",
+      "backup camera"
+    ]
+  },
+  {
+    "id": "56",
+    "make": "Subaru",
+    "model": "WRX Premium",
+    "year": 2026,
+    "type": "sedan",
+    "transmission": "automatic",
+    "mileage": 9,
+    "price": 37995,
+    "color": "sapphire blue",
+    "engine": "2.4L turbo 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "sport tuned suspension",
+      "apple carplay",
+      "eyesight driver assist",
+      "heated seats",
+      "sunroof",
+      "backup camera"
+    ]
+  },
+  {
+    "id": "57",
+    "make": "Subaru",
+    "model": "WRX GT",
+    "year": 2026,
+    "type": "sedan",
+    "transmission": "manual",
+    "mileage": 5,
+    "price": 45995,
+    "color": "plasma yellow",
+    "engine": "2.4L turbo 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "brembo brakes",
+      "bilstein suspension",
+      "apple carplay",
+      "eyesight driver assist",
+      "leather seats",
+      "heated seats",
+      "sunroof"
+    ]
+  },
+  {
+    "id": "58",
+    "make": "Subaru",
+    "model": "BRZ Premium",
+    "year": 2026,
+    "type": "coupe",
+    "transmission": "manual",
+    "mileage": 6,
+    "price": 32995,
+    "color": "magnetite gray",
+    "engine": "2.4L 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "sport tuned suspension",
+      "apple carplay",
+      "heated seats",
+      "18-inch wheels",
+      "backup camera"
+    ]
+  },
+  {
+    "id": "59",
+    "make": "Subaru",
+    "model": "BRZ Limited",
+    "year": 2026,
+    "type": "coupe",
+    "transmission": "automatic",
+    "mileage": 8,
+    "price": 37995,
+    "color": "sapphire blue",
+    "engine": "2.4L 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "brembo brakes",
+      "leather seats",
+      "sunroof",
+      "apple carplay",
+      "eyesight driver assist",
+      "heated seats"
+    ]
+  },
+  {
+    "id": "60",
+    "make": "Subaru",
+    "model": "Ascent Premium",
+    "year": 2026,
+    "type": "suv",
+    "transmission": "automatic",
+    "mileage": 5,
+    "price": 39995,
+    "color": "crystal white",
+    "engine": "2.4L turbo 4-cylinder Boxer",
+    "origin": "japanese",
+    "condition": "new",
+    "features": [
+      "third row seats",
+      "apple carplay",
+      "eyesight driver assist",
+      "heated seats",
+      "blind spot monitoring",
+      "backup camera"
+    ]
   }
 ]
