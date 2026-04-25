@@ -131,7 +131,10 @@
               <span><i class="bi bi-speedometer2 me-1"></i>{{ "{:,}".format(v.mileage) }} mi</span>
               <span><i class="bi bi-palette me-1"></i>{{ v.color|capitalize }}</span>
             </div>
-            <p class="fw-bold text-danger fs-5 mb-0">${{ "{:,.0f}".format(v.price) }}</p>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+              <p class="fw-bold text-danger fs-5 mb-0">${{ "{:,.0f}".format(v.price) }}</p>
+              <a href="/vehicle/{{ v.id }}" class="btn btn-sm btn-outline-danger">View Details</a>
+            </div>
           </div>
         </div>
       </div>
