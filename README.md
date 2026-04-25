@@ -208,15 +208,15 @@ uvicorn app.main:app --port 8001 --reload
 ### Makefile Commands
 
 ```bash
-make up          # Start services in background
-make down        # Stop services
-make reset       # Full teardown including volumes
-make build       # Rebuild and start
-make migrate     # Run database migrations
-make migration msg="description"  # Generate new migration
-make demo        # Seed PostgreSQL + ChromaDB
-make logs        # Stream container logs
-make freeze      # Update requirements.txt
+make up                          # Start services in background
+make down                        # Stop services
+make reset                       # Full teardown including volumes
+make build                       # Rebuild and start
+make migrate                     # Run database migrations
+make migration msg="add table"   # Generate new Alembic migration
+make demo                        # Seed PostgreSQL + ChromaDB
+make logs                        # Stream container logs
+make freeze                      # Update requirements.txt
 ```
 
 ---
