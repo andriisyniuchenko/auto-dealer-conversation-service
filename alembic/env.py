@@ -8,6 +8,7 @@ from alembic import context
 from app.core.config import settings
 from app.core.database import Base
 import app.models.chat  # noqa: F401
+import app.models.vehicle  # noqa: F401
 
 config = context.config
 

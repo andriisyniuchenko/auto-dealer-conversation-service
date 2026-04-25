@@ -16,7 +16,7 @@ db:
 	docker-compose up -d postgres
 
 demo:
-	docker-compose run --rm chatbot python scripts/seed_chromadb.py
+	docker-compose run --rm chatbot python scripts/seed.py
 
 migrate:
 	alembic upgrade head
