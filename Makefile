@@ -18,9 +18,9 @@ migration:
 demo:
 	docker-compose up -d postgres chromadb
 	sleep 5
-	docker-compose run --rm web alembic upgrade head
+	docker-compose run --rm --build web alembic upgrade head
 	docker-compose run --rm web python scripts/seed.py
-	docker-compose up -d web
+	docker-compose up --build -d web
 
 logs:
 	docker-compose logs -f

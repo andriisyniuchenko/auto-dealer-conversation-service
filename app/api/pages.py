@@ -7,10 +7,10 @@ router = APIRouter()
 
 
 @router.get("/about", response_class=HTMLResponse)
-def about(request: Request):
+async def about(request: Request):
     return templates.TemplateResponse(request=request, name="about.html")
 
 
 @router.get("/parts-service", response_class=HTMLResponse)
-def parts_service(request: Request):
+async def parts_service(request: Request):
     return templates.TemplateResponse(request=request, name="parts_service.html")

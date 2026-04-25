@@ -3,11 +3,16 @@ import os
 import sys
 
 import chromadb
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
-from app.core.database import SessionLocal
+from app.core.config import settings
 from app.models.vehicle import Vehicle
+
+_engine = create_engine(settings.database_url)
+SessionLocal = sessionmaker(bind=_engine)
 
 CHROMA_HOST = os.getenv("CHROMA_HOST", "localhost")
 CHROMA_PORT = int(os.getenv("CHROMA_PORT", 8000))

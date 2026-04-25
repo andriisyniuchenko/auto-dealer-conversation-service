@@ -1,8 +1,8 @@
 import os
 from fastapi import APIRouter, Request, Depends, HTTPException
 from fastapi.responses import HTMLResponse
-from sqlalchemy.orm import Session
-from sqlalchemy import distinct
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select, distinct
 
 from app.core.database import get_db
 from app.core.templates import templates
@@ -31,9 +31,49 @@ def _get_vehicle_image(vehicle: Vehicle) -> str:
     return None
 
 
+def _apply_range(stmt, column, range_value: str):
+    if not range_value:
+        return stmt
+    if range_value.startswith("under_"):
+        return stmt.where(column <= int(range_value[6:]))
+    if range_value.startswith("over_"):
+        return stmt.where(column >= int(range_value[5:]))
+    return stmt
+
+
+@router.get("/inventory/new", response_class=HTMLResponse)
+async def new_vehicles(request: Request, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(Vehicle).where(Vehicle.condition == "new").order_by(Vehicle.price))
+    vehicles = result.scalars().all()
+    return templates.TemplateResponse(
+        request=request,
+        name="vehicle_list.html",
+        context={
+            "title": "New Vehicles",
+            "subtitle": "Brand new 2026 models ready to drive off the lot.",
+            "vehicles": vehicles,
+        },
+    )
+
+
+@router.get("/inventory/used", response_class=HTMLResponse)
+async def used_vehicles(request: Request, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(Vehicle).where(Vehicle.condition == "used").order_by(Vehicle.price))
+    vehicles = result.scalars().all()
+    return templates.TemplateResponse(
+        request=request,
+        name="vehicle_list.html",
+        context={
+            "title": "Used Vehicles",
+            "subtitle": "Quality pre-owned vehicles at great prices.",
+            "vehicles": vehicles,
+        },
+    )
+
+
 @router.get("/vehicle/{vehicle_id}", response_class=HTMLResponse)
-def vehicle_detail(vehicle_id: str, request: Request, db: Session = Depends(get_db)):
-    vehicle = db.get(Vehicle, vehicle_id)
+async def vehicle_detail(vehicle_id: str, request: Request, db: AsyncSession = Depends(get_db)):
+    vehicle = await db.get(Vehicle, vehicle_id)
     if not vehicle:
         raise HTTPException(status_code=404, detail="Vehicle not found")
     return templates.TemplateResponse(
@@ -47,74 +87,39 @@ def vehicle_detail(vehicle_id: str, request: Request, db: Session = Depends(get_
     )
 
 
-def _apply_range(query, column, range_value: str):
-    if not range_value:
-        return query
-    if range_value.startswith("under_"):
-        return query.filter(column <= int(range_value[6:]))
-    if range_value.startswith("over_"):
-        return query.filter(column >= int(range_value[5:]))
-    return query
-
-
-@router.get("/inventory/new", response_class=HTMLResponse)
-def new_vehicles(request: Request, db: Session = Depends(get_db)):
-    vehicles = db.query(Vehicle).filter(Vehicle.condition == "new").order_by(Vehicle.price).all()
-    return templates.TemplateResponse(
-        request=request,
-        name="vehicle_list.html",
-        context={
-            "title": "New Vehicles",
-            "subtitle": "Brand new 2026 models ready to drive off the lot.",
-            "vehicles": vehicles,
-        },
-    )
-
-
-@router.get("/inventory/used", response_class=HTMLResponse)
-def used_vehicles(request: Request, db: Session = Depends(get_db)):
-    vehicles = db.query(Vehicle).filter(Vehicle.condition == "used").order_by(Vehicle.price).all()
-    return templates.TemplateResponse(
-        request=request,
-        name="vehicle_list.html",
-        context={
-            "title": "Used Vehicles",
-            "subtitle": "Quality pre-owned vehicles at great prices.",
-            "vehicles": vehicles,
-        },
-    )
-
-
 @router.get("/", response_class=HTMLResponse)
-def index(
+async def index(
     request: Request,
     condition: str = "",
     year: str = "",
     make: str = "",
     mileage_range: str = "",
     price_range: str = "",
-    db: Session = Depends(get_db),
+    db: AsyncSession = Depends(get_db),
 ):
-    makes = [r[0] for r in db.query(distinct(Vehicle.make)).order_by(Vehicle.make).all()]
+    makes_result = await db.execute(select(distinct(Vehicle.make)).order_by(Vehicle.make))
+    makes = makes_result.scalars().all()
 
-    query = db.query(Vehicle)
+    stmt = select(Vehicle)
 
     if condition in ("new", "used"):
-        query = query.filter(Vehicle.condition == condition)
+        stmt = stmt.where(Vehicle.condition == condition)
 
     if year:
         try:
-            query = query.filter(Vehicle.year == int(year))
+            stmt = stmt.where(Vehicle.year == int(year))
         except ValueError:
             pass
 
     if make:
-        query = query.filter(Vehicle.make == make)
+        stmt = stmt.where(Vehicle.make == make)
 
-    query = _apply_range(query, Vehicle.mileage, mileage_range)
-    query = _apply_range(query, Vehicle.price, price_range)
+    stmt = _apply_range(stmt, Vehicle.mileage, mileage_range)
+    stmt = _apply_range(stmt, Vehicle.price, price_range)
 
-    vehicles = query.order_by(Vehicle.condition, Vehicle.price).all()
+    stmt = stmt.order_by(Vehicle.condition, Vehicle.price)
+    result = await db.execute(stmt)
+    vehicles = result.scalars().all()
 
     return templates.TemplateResponse(
         request=request,
