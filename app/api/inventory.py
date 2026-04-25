@@ -10,6 +10,16 @@ from app.models.vehicle import Vehicle
 router = APIRouter()
 
 
+def _apply_range(query, column, range_value: str):
+    if not range_value:
+        return query
+    if range_value.startswith("under_"):
+        return query.filter(column <= int(range_value[6:]))
+    if range_value.startswith("over_"):
+        return query.filter(column >= int(range_value[5:]))
+    return query
+
+
 @router.get("/inventory/new", response_class=HTMLResponse)
 def new_vehicles(request: Request, db: Session = Depends(get_db)):
     vehicles = db.query(Vehicle).filter(Vehicle.condition == "new").order_by(Vehicle.price).all()
@@ -44,8 +54,8 @@ def index(
     condition: str = "",
     year: str = "",
     make: str = "",
-    max_mileage: str = "",
-    max_price: str = "",
+    mileage_range: str = "",
+    price_range: str = "",
     db: Session = Depends(get_db),
 ):
     makes = [r[0] for r in db.query(distinct(Vehicle.make)).order_by(Vehicle.make).all()]
@@ -56,21 +66,18 @@ def index(
         query = query.filter(Vehicle.condition == condition)
 
     if year:
-        query = query.filter(Vehicle.year == int(year))
+        try:
+            query = query.filter(Vehicle.year == int(year))
+        except ValueError:
+            pass
 
     if make:
         query = query.filter(Vehicle.make == make)
 
-    if max_mileage:
-        query = query.filter(Vehicle.mileage <= int(max_mileage))
+    query = _apply_range(query, Vehicle.mileage, mileage_range)
+    query = _apply_range(query, Vehicle.price, price_range)
 
-    if max_price == "60000+":
-        query = query.filter(Vehicle.price > 60000)
-    elif max_price:
-        query = query.filter(Vehicle.price <= float(max_price))
-
-    searched = any([condition, year, make, max_mileage, max_price])
-    vehicles = query.order_by(Vehicle.year.desc()).all() if searched else []
+    vehicles = query.order_by(Vehicle.condition, Vehicle.price).all()
 
     return templates.TemplateResponse(
         request=request,
@@ -78,13 +85,12 @@ def index(
         context={
             "makes": makes,
             "vehicles": vehicles,
-            "searched": searched,
             "filters": {
                 "condition": condition,
                 "year": year,
                 "make": make,
-                "max_mileage": max_mileage,
-                "max_price": max_price,
+                "mileage_range": mileage_range,
+                "price_range": price_range,
             },
         },
     )
