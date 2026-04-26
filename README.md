@@ -2,6 +2,12 @@
 
 A full-stack web application for a fictional auto dealership built with Python and FastAPI. Part of a two-service microservice system — this service handles the customer-facing website, while a separate CRM service ([auto_dealer_crm](https://github.com/andriisyniuchenko/auto_dealer_crm)) manages leads and sales operations.
 
+[![CI](https://github.com/andriisyniuchenko/auto-dealer-conversation-service/actions/workflows/ci.yml/badge.svg)](https://github.com/andriisyniuchenko/auto-dealer-conversation-service/actions/workflows/ci.yml)
+![Python](https://img.shields.io/badge/Python-3.14-blue?logo=python)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.136-green?logo=fastapi)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue?logo=postgresql)
+![Docker](https://img.shields.io/badge/Docker-Compose-blue?logo=docker)
+
 > **Demo project for portfolio purposes only. Not a real dealership.**
 
 ---
@@ -93,6 +99,13 @@ auto-dealer-conversation-service/
 │       └── inventory.json       # Source inventory data (60 vehicles)
 ├── scripts/
 │   └── seed.py                  # Seeds PostgreSQL + ChromaDB from inventory.json
+├── tests/
+│   ├── conftest.py              # Fixtures: async test DB, client, sample vehicle
+│   ├── test_inventory.py        # Route and filter tests
+│   └── test_contact.py          # Lead form tests
+├── .github/
+│   └── workflows/
+│       └── ci.yml               # GitHub Actions CI
 ├── alembic/                     # Database migrations
 ├── Dockerfile
 ├── docker-compose.yml
@@ -282,6 +295,21 @@ Chat response with matching vehicles
 - LangChain for orchestration
 - ChromaDB for RAG (Retrieval-Augmented Generation)
 - Conversation history stored in PostgreSQL (`chat_sessions`, `chat_messages`)
+
+---
+
+## Testing
+
+```bash
+pytest tests/ -v
+```
+
+15 tests covering:
+- All inventory routes (homepage, new/used listings, vehicle detail, filters)
+- 404 and unknown route redirect behavior
+- Lead form validation, CRM success/failure, unknown vehicle handling
+
+Tests use an in-memory SQLite database — no external services required.
 
 ---
 
