@@ -9,7 +9,7 @@ services:
       - CHROMA_HOST=chromadb
       - CHROMA_PORT=8000
       - CRM_API_URL=http://host.docker.internal:8000
-      - CRM_API_KEY=super-secret-website-key
+      - CRM_API_KEY=${CRM_API_KEY}
     depends_on:
       - postgres
       - chromadb
