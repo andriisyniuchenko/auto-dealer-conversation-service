@@ -21,6 +21,7 @@ __pycache__/
 
 # Pytest
 .pytest_cache/
+test.db
 
 # Coverage
 .coverage
