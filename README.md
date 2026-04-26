@@ -246,7 +246,7 @@ make freeze                     # Update requirements.txt
 The inventory contains **60 vehicles**:
 
 - **30 new vehicles** — 2026 Subaru lineup (Crosstrek, Forester, Outback, Solterra, Trailseeker, WRX, BRZ, Impreza, Ascent). Mileage under 10 miles.
-- **30 used vehicles** — Mix of Japanese, American, European, and Korean makes from 2014–2022. Priced from $7,000 to $62,000.
+- **30 used vehicles** — Mix of Japanese, American, European, and Korean makes from 2014 to 2022. Priced from $7,000 to $62,000.
 
 Source data: `app/data/inventory.json`
 
