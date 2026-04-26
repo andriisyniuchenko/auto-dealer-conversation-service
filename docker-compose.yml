@@ -8,6 +8,8 @@ services:
       - DATABASE_URL=postgresql+psycopg2://postgres:postgres@postgres:5432/web_db
       - CHROMA_HOST=chromadb
       - CHROMA_PORT=8000
+      - CRM_API_URL=http://host.docker.internal:8000
+      - CRM_API_KEY=super-secret-website-key
     depends_on:
       - postgres
       - chromadb

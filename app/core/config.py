@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     chroma_port: int
     ollama_base_url: str
     crm_api_url: str
+    crm_api_key: str
 
     class Config:
         env_file = ".env"
