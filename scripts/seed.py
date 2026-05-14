@@ -17,6 +17,21 @@ SessionLocal = sessionmaker(bind=_engine)
 
 INVENTORY_PATH = os.path.join(os.path.dirname(__file__), "../app/data/inventory.json")
 OPENSEARCH_INDEX = "vehicles"
+PIPELINE_ID = "hybrid-search-pipeline"
+PIPELINE_BODY = {
+    "description": "Hybrid knn + BM25 search pipeline",
+    "phase_results_processors": [
+        {
+            "normalization-processor": {
+                "normalization": {"technique": "min_max"},
+                "combination": {
+                    "technique": "arithmetic_mean",
+                    "parameters": {"weights": [0.4, 0.6]},
+                },
+            }
+        }
+    ],
+}
 EMBEDDING_DIM = 768
 
 _embeddings = OllamaEmbeddings(
@@ -93,6 +108,9 @@ def seed_postgres(inventory: list):
 
 def seed_opensearch(inventory: list):
     client = OpenSearch(settings.opensearch_url)
+
+    client.transport.perform_request("PUT", f"/_search/pipeline/{PIPELINE_ID}", body=PIPELINE_BODY)
+    print(f"OpenSearch: created pipeline '{PIPELINE_ID}'.")
 
     if client.indices.exists(index=OPENSEARCH_INDEX):
         client.indices.delete(index=OPENSEARCH_INDEX)

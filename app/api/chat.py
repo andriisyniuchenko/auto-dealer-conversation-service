@@ -45,7 +45,7 @@ async def send_message(body: ChatMessageRequest, graph=Depends(get_graph)):
                 messages = [
                     {"role": "user" if msg.type == "human" else "assistant", "content": msg.content}
                     for msg in snapshot.values.get("messages", [])
-                    if msg.type in ("human", "ai") and msg.content
+                    if msg.type in ("human", "ai") and msg.content and msg.content != "__greet__"
                 ]
                 crm_lead_id = snapshot.values.get("crm_lead_id")
                 await save_chat_session(body.session_id, messages, lead_id=crm_lead_id)
