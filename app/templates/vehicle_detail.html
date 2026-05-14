@@ -32,7 +32,7 @@
         <span class="text-muted small text-capitalize">{{ vehicle.type }}</span>
       </div>
 
-      <h2 class="fw-bold mb-1">{{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}</h2>
+      <h2 class="fw-bold mb-1">{{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}{% if vehicle.trim %} {{ vehicle.trim }}{% endif %}</h2>
       <h3 class="text-danger fw-bold mb-4">${{ "{:,.0f}".format(vehicle.price) }}</h3>
 
       <table class="table table-sm table-borderless mb-4">

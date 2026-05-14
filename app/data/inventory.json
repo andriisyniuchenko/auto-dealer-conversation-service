@@ -16,7 +16,8 @@
       "bluetooth",
       "heated seats"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "2",
@@ -35,7 +36,8 @@
       "lane assist",
       "backup camera"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "3",
@@ -54,7 +56,8 @@
       "blind spot monitoring",
       "heated seats"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "4",
@@ -73,7 +76,8 @@
       "bluetooth",
       "cruise control"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "5",
@@ -93,7 +97,8 @@
       "apple carplay",
       "heated seats"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "6",
@@ -113,7 +118,8 @@
       "heated seats",
       "bluetooth"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "7",
@@ -133,7 +139,8 @@
       "backup camera",
       "bluetooth"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "8",
@@ -152,7 +159,8 @@
       "bluetooth",
       "remote start"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "9",
@@ -171,7 +179,8 @@
       "removable doors",
       "off-road package"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "10",
@@ -190,7 +199,8 @@
       "bluetooth",
       "backup camera"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "11",
@@ -209,7 +219,8 @@
       "backup camera",
       "heated seats"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "12",
@@ -229,7 +240,8 @@
       "backup camera",
       "heated seats"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "13",
@@ -249,7 +261,8 @@
       "apple carplay",
       "lane assist"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "14",
@@ -268,7 +281,8 @@
       "bluetooth",
       "heated seats"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "15",
@@ -289,7 +303,8 @@
       "heated seats",
       "lane assist"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "16",
@@ -309,7 +324,8 @@
       "blind spot monitoring",
       "backup camera"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "17",
@@ -330,7 +346,8 @@
       "heated seats",
       "apple carplay"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "18",
@@ -351,7 +368,8 @@
       "apple carplay",
       "backup camera"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "19",
@@ -369,7 +387,8 @@
       "bluetooth",
       "backup camera"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "20",
@@ -388,7 +407,8 @@
       "backup camera",
       "heated seats"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "21",
@@ -406,7 +426,8 @@
       "bluetooth",
       "backup camera"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "22",
@@ -425,7 +446,8 @@
       "backup camera",
       "magic seat"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "23",
@@ -443,7 +465,8 @@
       "bluetooth",
       "backup camera"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "24",
@@ -461,7 +484,8 @@
       "bluetooth",
       "heated seats"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "25",
@@ -483,7 +507,8 @@
       "blind spot monitoring",
       "backup camera"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "26",
@@ -503,7 +528,8 @@
       "premium sound",
       "glass roof"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "27",
@@ -524,7 +550,8 @@
       "sunroof",
       "apple carplay"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "28",
@@ -545,7 +572,8 @@
       "sport chrono package",
       "backup camera"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "29",
@@ -566,7 +594,8 @@
       "sunroof",
       "apple carplay"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "30",
@@ -588,7 +617,8 @@
       "apple carplay",
       "blind spot monitoring"
     ],
-    "condition": "used"
+    "condition": "used",
+    "trim": null
   },
   {
     "id": "31",
@@ -609,12 +639,13 @@
       "eyesight driver assist",
       "backup camera",
       "bluetooth"
-    ]
+    ],
+    "trim": null
   },
   {
     "id": "32",
     "make": "Subaru",
-    "model": "Crosstrek Premium",
+    "model": "Crosstrek",
     "year": 2026,
     "type": "suv",
     "transmission": "automatic",
@@ -631,12 +662,13 @@
       "heated seats",
       "backup camera",
       "bluetooth"
-    ]
+    ],
+    "trim": "Premium"
   },
   {
     "id": "33",
     "make": "Subaru",
-    "model": "Crosstrek Sport",
+    "model": "Crosstrek",
     "year": 2026,
     "type": "suv",
     "transmission": "automatic",
@@ -653,12 +685,13 @@
       "eyesight driver assist",
       "heated seats",
       "backup camera"
-    ]
+    ],
+    "trim": "Sport"
   },
   {
     "id": "34",
     "make": "Subaru",
-    "model": "Crosstrek Limited",
+    "model": "Crosstrek",
     "year": 2026,
     "type": "suv",
     "transmission": "automatic",
@@ -675,12 +708,13 @@
       "apple carplay",
       "eyesight driver assist",
       "heated seats"
-    ]
+    ],
+    "trim": "Limited"
   },
   {
     "id": "35",
     "make": "Subaru",
-    "model": "Crosstrek Wilderness",
+    "model": "Crosstrek",
     "year": 2026,
     "type": "suv",
     "transmission": "automatic",
@@ -696,7 +730,8 @@
       "all-terrain tires",
       "apple carplay",
       "eyesight driver assist"
-    ]
+    ],
+    "trim": "Wilderness"
   },
   {
     "id": "36",
@@ -717,12 +752,13 @@
       "eyesight driver assist",
       "backup camera",
       "bluetooth"
-    ]
+    ],
+    "trim": null
   },
   {
     "id": "37",
     "make": "Subaru",
-    "model": "Forester Premium",
+    "model": "Forester",
     "year": 2026,
     "type": "suv",
     "transmission": "automatic",
@@ -738,12 +774,13 @@
       "panoramic moonroof",
       "eyesight driver assist",
       "backup camera"
-    ]
+    ],
+    "trim": "Premium"
   },
   {
     "id": "38",
     "make": "Subaru",
-    "model": "Forester Sport",
+    "model": "Forester",
     "year": 2026,
     "type": "suv",
     "transmission": "automatic",
@@ -760,12 +797,13 @@
       "18-inch wheels",
       "eyesight driver assist",
       "backup camera"
-    ]
+    ],
+    "trim": "Sport"
   },
   {
     "id": "39",
     "make": "Subaru",
-    "model": "Forester Limited",
+    "model": "Forester",
     "year": 2026,
     "type": "suv",
     "transmission": "automatic",
@@ -782,12 +820,13 @@
       "apple carplay",
       "heated seats",
       "eyesight driver assist"
-    ]
+    ],
+    "trim": "Limited"
   },
   {
     "id": "40",
     "make": "Subaru",
-    "model": "Forester Touring",
+    "model": "Forester",
     "year": 2026,
     "type": "suv",
     "transmission": "automatic",
@@ -805,12 +844,13 @@
       "blind spot monitoring",
       "apple carplay",
       "heated seats"
-    ]
+    ],
+    "trim": "Touring"
   },
   {
     "id": "41",
     "make": "Subaru",
-    "model": "Forester Wilderness",
+    "model": "Forester",
     "year": 2026,
     "type": "suv",
     "transmission": "automatic",
@@ -827,7 +867,8 @@
       "apple carplay",
       "eyesight driver assist",
       "heated seats"
-    ]
+    ],
+    "trim": "Wilderness"
   },
   {
     "id": "42",
@@ -848,12 +889,13 @@
       "eyesight driver assist",
       "backup camera",
       "bluetooth"
-    ]
+    ],
+    "trim": null
   },
   {
     "id": "43",
     "make": "Subaru",
-    "model": "Outback Premium",
+    "model": "Outback",
     "year": 2026,
     "type": "wagon",
     "transmission": "automatic",
@@ -869,12 +911,13 @@
       "blind spot monitoring",
       "eyesight driver assist",
       "backup camera"
-    ]
+    ],
+    "trim": "Premium"
   },
   {
     "id": "44",
     "make": "Subaru",
-    "model": "Outback Sport XT",
+    "model": "Outback",
     "year": 2026,
     "type": "wagon",
     "transmission": "automatic",
@@ -890,12 +933,13 @@
       "heated seats",
       "18-inch wheels",
       "eyesight driver assist"
-    ]
+    ],
+    "trim": "Sport XT"
   },
   {
     "id": "45",
     "make": "Subaru",
-    "model": "Outback Limited",
+    "model": "Outback",
     "year": 2026,
     "type": "wagon",
     "transmission": "automatic",
@@ -912,12 +956,13 @@
       "apple carplay",
       "heated seats",
       "eyesight driver assist"
-    ]
+    ],
+    "trim": "Limited"
   },
   {
     "id": "46",
     "make": "Subaru",
-    "model": "Outback Wilderness",
+    "model": "Outback",
     "year": 2026,
     "type": "wagon",
     "transmission": "automatic",
@@ -934,12 +979,13 @@
       "apple carplay",
       "eyesight driver assist",
       "heated seats"
-    ]
+    ],
+    "trim": "Wilderness"
   },
   {
     "id": "47",
     "make": "Subaru",
-    "model": "Outback Touring XT",
+    "model": "Outback",
     "year": 2026,
     "type": "wagon",
     "transmission": "automatic",
@@ -957,7 +1003,8 @@
       "blind spot monitoring",
       "apple carplay",
       "heated seats"
-    ]
+    ],
+    "trim": "Touring XT"
   },
   {
     "id": "48",
@@ -979,12 +1026,13 @@
       "eyesight driver assist",
       "heated seats",
       "backup camera"
-    ]
+    ],
+    "trim": null
   },
   {
     "id": "49",
     "make": "Subaru",
-    "model": "Solterra Premium",
+    "model": "Solterra",
     "year": 2026,
     "type": "suv",
     "transmission": "automatic",
@@ -1002,12 +1050,13 @@
       "eyesight driver assist",
       "heated seats",
       "blind spot monitoring"
-    ]
+    ],
+    "trim": "Premium"
   },
   {
     "id": "50",
     "make": "Subaru",
-    "model": "Solterra Limited",
+    "model": "Solterra",
     "year": 2026,
     "type": "suv",
     "transmission": "automatic",
@@ -1027,7 +1076,8 @@
       "heated seats",
       "blind spot monitoring",
       "harman kardon audio"
-    ]
+    ],
+    "trim": "Limited"
   },
   {
     "id": "51",
@@ -1049,12 +1099,13 @@
       "eyesight driver assist",
       "heated seats",
       "backup camera"
-    ]
+    ],
+    "trim": null
   },
   {
     "id": "52",
     "make": "Subaru",
-    "model": "Trailseeker XT",
+    "model": "Trailseeker",
     "year": 2026,
     "type": "suv",
     "transmission": "automatic",
@@ -1073,7 +1124,8 @@
       "eyesight driver assist",
       "heated seats",
       "blind spot monitoring"
-    ]
+    ],
+    "trim": "XT"
   },
   {
     "id": "53",
@@ -1094,12 +1146,13 @@
       "eyesight driver assist",
       "backup camera",
       "bluetooth"
-    ]
+    ],
+    "trim": null
   },
   {
     "id": "54",
     "make": "Subaru",
-    "model": "Impreza Sport",
+    "model": "Impreza",
     "year": 2026,
     "type": "hatchback",
     "transmission": "automatic",
@@ -1116,7 +1169,8 @@
       "heated seats",
       "18-inch wheels",
       "backup camera"
-    ]
+    ],
+    "trim": "Sport"
   },
   {
     "id": "55",
@@ -1137,12 +1191,13 @@
       "eyesight driver assist",
       "heated seats",
       "backup camera"
-    ]
+    ],
+    "trim": null
   },
   {
     "id": "56",
     "make": "Subaru",
-    "model": "WRX Premium",
+    "model": "WRX",
     "year": 2026,
     "type": "sedan",
     "transmission": "automatic",
@@ -1159,12 +1214,13 @@
       "heated seats",
       "sunroof",
       "backup camera"
-    ]
+    ],
+    "trim": "Premium"
   },
   {
     "id": "57",
     "make": "Subaru",
-    "model": "WRX GT",
+    "model": "WRX",
     "year": 2026,
     "type": "sedan",
     "transmission": "manual",
@@ -1182,12 +1238,13 @@
       "leather seats",
       "heated seats",
       "sunroof"
-    ]
+    ],
+    "trim": "GT"
   },
   {
     "id": "58",
     "make": "Subaru",
-    "model": "BRZ Premium",
+    "model": "BRZ",
     "year": 2026,
     "type": "coupe",
     "transmission": "manual",
@@ -1203,12 +1260,13 @@
       "heated seats",
       "18-inch wheels",
       "backup camera"
-    ]
+    ],
+    "trim": "Premium"
   },
   {
     "id": "59",
     "make": "Subaru",
-    "model": "BRZ Limited",
+    "model": "BRZ",
     "year": 2026,
     "type": "coupe",
     "transmission": "automatic",
@@ -1225,12 +1283,13 @@
       "apple carplay",
       "eyesight driver assist",
       "heated seats"
-    ]
+    ],
+    "trim": "Limited"
   },
   {
     "id": "60",
     "make": "Subaru",
-    "model": "Ascent Premium",
+    "model": "Ascent",
     "year": 2026,
     "type": "suv",
     "transmission": "automatic",
@@ -1247,6 +1306,7 @@
       "heated seats",
       "blind spot monitoring",
       "backup camera"
-    ]
+    ],
+    "trim": "Premium"
   }
 ]

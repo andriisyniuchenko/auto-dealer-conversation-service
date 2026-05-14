@@ -1,4 +1,5 @@
 import os
+import json
 from fastapi import APIRouter, Request, Depends
 from fastapi.responses import HTMLResponse, RedirectResponse
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -90,18 +91,49 @@ async def vehicle_detail(vehicle_id: str, request: Request, db: AsyncSession = D
     )
 
 
+async def _build_filter_data(db: AsyncSession) -> str:
+    rows_result = await db.execute(
+        select(Vehicle.condition, Vehicle.make, Vehicle.model, Vehicle.year).order_by(Vehicle.make, Vehicle.model)
+    )
+    data: dict = {"new": {}, "used": {}}
+    years_by_condition: dict = {"new": set(), "used": set()}
+    for cond, v_make, v_model, v_year in rows_result.all():
+        if v_make not in data[cond]:
+            data[cond][v_make] = {"models": [], "years": []}
+        if v_model not in data[cond][v_make]["models"]:
+            data[cond][v_make]["models"].append(v_model)
+        if v_year not in data[cond][v_make]["years"]:
+            data[cond][v_make]["years"].append(v_year)
+        years_by_condition[cond].add(v_year)
+    data["_years"] = {
+        "new": sorted(years_by_condition["new"], reverse=True),
+        "used": sorted(years_by_condition["used"], reverse=True),
+    }
+    return json.dumps(data)
+
+
 @router.get("/", response_class=HTMLResponse)
-async def index(
+async def index(request: Request, db: AsyncSession = Depends(get_db)):
+    filter_data_json = await _build_filter_data(db)
+    return templates.TemplateResponse(
+        request=request,
+        name="index.html",
+        context={"filter_data_json": filter_data_json},
+    )
+
+
+@router.get("/search", response_class=HTMLResponse)
+async def search(
     request: Request,
     condition: str = "",
     year: str = "",
     make: str = "",
+    model: str = "",
     mileage_range: str = "",
     price_range: str = "",
     db: AsyncSession = Depends(get_db),
 ):
-    makes_result = await db.execute(select(distinct(Vehicle.make)).order_by(Vehicle.make))
-    makes = makes_result.scalars().all()
+    filter_data_json = await _build_filter_data(db)
 
     stmt = select(Vehicle)
 
@@ -117,6 +149,9 @@ async def index(
     if make:
         stmt = stmt.where(Vehicle.make == make)
 
+    if model:
+        stmt = stmt.where(Vehicle.model == model)
+
     stmt = _apply_range(stmt, Vehicle.mileage, mileage_range)
     stmt = _apply_range(stmt, Vehicle.price, price_range)
 
@@ -126,14 +161,15 @@ async def index(
 
     return templates.TemplateResponse(
         request=request,
-        name="index.html",
+        name="search.html",
         context={
-            "makes": makes,
+            "filter_data_json": filter_data_json,
             "vehicles": vehicles,
             "filters": {
                 "condition": condition,
                 "year": year,
                 "make": make,
+                "model": model,
                 "mileage_range": mileage_range,
                 "price_range": price_range,
             },

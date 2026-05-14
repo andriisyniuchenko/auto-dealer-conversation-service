@@ -37,11 +37,14 @@ def seed_postgres(inventory: list):
             vehicle = db.get(Vehicle, v["id"])
             if vehicle:
                 vehicle.condition = v["condition"]
+                vehicle.model = v["model"]
+                vehicle.trim = v.get("trim")
             else:
                 db.add(Vehicle(
                     id=v["id"],
                     make=v["make"],
                     model=v["model"],
+                    trim=v.get("trim"),
                     year=v["year"],
                     type=v["type"],
                     transmission=v["transmission"],

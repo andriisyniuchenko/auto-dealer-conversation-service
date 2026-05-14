@@ -19,3 +19,4 @@ class Vehicle(Base):
     origin = Column(String, nullable=False)
     features = Column(Text, nullable=False, default="")
     condition = Column(String, nullable=False, default="used")
+    trim = Column(String, nullable=True)
