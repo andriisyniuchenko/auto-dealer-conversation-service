@@ -6,7 +6,10 @@ from app.services import crm, opensearch
 @tool
 async def search_vehicles(query: str) -> str:
     """Search Galaxy Motors inventory for vehicles matching the customer's needs."""
-    results = await opensearch.search_vehicles(query)
+    try:
+        results = await opensearch.search_vehicles(query)
+    except Exception:
+        return "Unable to search inventory at the moment."
     if not results:
         return "No vehicles found matching that criteria."
     lines = [
@@ -27,7 +30,7 @@ async def submit_lead(
     notes: str = "",
 ) -> str:
     """Submit a customer lead to the CRM when they want to be contacted by a sales rep."""
-    success = await crm.submit_lead_from_chat(
+    lead_id = await crm.submit_lead_from_chat(
         first_name=first_name,
         last_name=last_name,
         phone=phone,
@@ -35,6 +38,6 @@ async def submit_lead(
         email=email or None,
         notes=notes or None,
     )
-    if success:
-        return f"Lead submitted for {first_name} {last_name}. A sales rep will be in touch soon."
-    return "Failed to submit lead. Please try again or call us directly."
+    if lead_id:
+        return f"Lead submitted for {first_name} {last_name}. crm_lead_id={lead_id}"
+    return "Failed to pass customer details. Please try again."

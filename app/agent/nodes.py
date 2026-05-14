@@ -29,12 +29,19 @@ async def agent_node(state: State) -> dict:
     if state.get("lead_submitted"):
         system = SystemMessage(
             content=SYSTEM_MESSAGE.content
-            + " A lead has already been submitted for this customer — do not submit another one."
+            + " Customer details have already been passed to the team — do not submit again."
         )
     else:
         system = SYSTEM_MESSAGE
     messages = [system] + state["messages"]
-    response = await _get_llm().ainvoke(messages)
+    from langchain_core.messages import AIMessage
+    for attempt in range(3):
+        try:
+            response = await _get_llm().ainvoke(messages)
+            break
+        except Exception:
+            if attempt == 2:
+                response = AIMessage(content="I'm sorry, could you rephrase that?")
     return {"messages": [response]}
 
 
@@ -51,8 +58,16 @@ async def track_lead_node(state: State) -> dict:
             )
             if tool_msg and "Lead submitted" in tool_msg.content:
                 args = tc["args"]
+                crm_lead_id = None
+                for part in tool_msg.content.split():
+                    if part.startswith("crm_lead_id="):
+                        try:
+                            crm_lead_id = int(part.split("=", 1)[1])
+                        except ValueError:
+                            pass
                 return {
                     "lead_submitted": True,
+                    "crm_lead_id": crm_lead_id,
                     "customer_first_name": args.get("first_name"),
                     "customer_last_name": args.get("last_name"),
                     "customer_phone": args.get("phone"),

@@ -31,7 +31,7 @@ async def submit_lead_from_chat(
     interest: str,
     email: str | None = None,
     notes: str | None = None,
-) -> bool:
+) -> int | None:
     payload = {
         "first_name": first_name,
         "last_name": last_name,
@@ -44,13 +44,15 @@ async def submit_lead_from_chat(
     try:
         async with httpx.AsyncClient(timeout=5.0) as client:
             response = await client.post(_LEADS_URL, json=payload, headers=_HEADERS)
-            return response.is_success
+            if response.is_success:
+                return response.json().get("lead_id")
+            return None
     except httpx.HTTPError:
-        return False
+        return None
 
 
-async def save_chat_session(session_id: str, messages: list[dict]) -> bool:
-    payload = {"session_id": session_id, "messages": messages}
+async def save_chat_session(session_id: str, messages: list[dict], lead_id: int | None = None) -> bool:
+    payload = {"session_id": session_id, "messages": messages, "lead_id": lead_id}
     try:
         async with httpx.AsyncClient(timeout=5.0) as client:
             response = await client.post(_CHAT_SESSIONS_URL, json=payload, headers=_HEADERS)

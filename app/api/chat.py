@@ -1,6 +1,9 @@
 import json
+import logging
 import uuid
 from datetime import datetime, timezone
+
+logger = logging.getLogger(__name__)
 
 from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
@@ -26,25 +29,30 @@ async def send_message(body: ChatMessageRequest, graph=Depends(get_graph)):
     config = {"configurable": {"thread_id": body.session_id}}
 
     async def event_stream():
-        async for event in graph.astream_events(
-            {"messages": [HumanMessage(content=body.message)]},
-            config=config,
-            version="v2",
-        ):
-            if event["event"] == "on_chat_model_stream":
-                chunk = event["data"]["chunk"]
-                if chunk.content:
-                    yield f"data: {json.dumps({'token': chunk.content})}\n\n"
+        try:
+            async for event in graph.astream_events(
+                {"messages": [HumanMessage(content=body.message)]},
+                config=config,
+                version="v2",
+            ):
+                if event["event"] == "on_chat_model_stream":
+                    chunk = event["data"]["chunk"]
+                    if chunk.content:
+                        yield f"data: {json.dumps({'token': chunk.content})}\n\n"
 
-        snapshot = await graph.aget_state(config)
-        if snapshot.values.get("lead_submitted"):
-            messages = [
-                {"role": "user" if msg.type == "human" else "assistant", "content": msg.content}
-                for msg in snapshot.values.get("messages", [])
-                if msg.type in ("human", "ai") and msg.content
-            ]
-            await save_chat_session(body.session_id, messages)
-            yield f"data: {json.dumps({'event': 'lead_submitted'})}\n\n"
+            snapshot = await graph.aget_state(config)
+            if snapshot.values.get("lead_submitted"):
+                messages = [
+                    {"role": "user" if msg.type == "human" else "assistant", "content": msg.content}
+                    for msg in snapshot.values.get("messages", [])
+                    if msg.type in ("human", "ai") and msg.content
+                ]
+                crm_lead_id = snapshot.values.get("crm_lead_id")
+                await save_chat_session(body.session_id, messages, lead_id=crm_lead_id)
+                yield f"data: {json.dumps({'event': 'lead_submitted'})}\n\n"
+        except Exception as e:
+            logger.exception("Error in chat stream: %s", e)
+            yield f"data: {json.dumps({'event': 'error'})}\n\n"
 
         yield "data: [DONE]\n\n"
 
