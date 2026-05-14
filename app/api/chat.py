@@ -8,6 +8,7 @@ from langchain_core.messages import HumanMessage
 
 from app.api.dependencies import get_graph
 from app.schemas.chat import ChatHistoryItem, ChatHistoryResponse, ChatMessageRequest, ChatSessionResponse
+from app.services.crm import save_chat_session
 
 router = APIRouter(prefix="/api/chat", tags=["chat"])
 
@@ -34,6 +35,17 @@ async def send_message(body: ChatMessageRequest, graph=Depends(get_graph)):
                 chunk = event["data"]["chunk"]
                 if chunk.content:
                     yield f"data: {json.dumps({'token': chunk.content})}\n\n"
+
+        snapshot = await graph.aget_state(config)
+        if snapshot.values.get("lead_submitted"):
+            messages = [
+                {"role": "user" if msg.type == "human" else "assistant", "content": msg.content}
+                for msg in snapshot.values.get("messages", [])
+                if msg.type in ("human", "ai") and msg.content
+            ]
+            await save_chat_session(body.session_id, messages)
+            yield f"data: {json.dumps({'event': 'lead_submitted'})}\n\n"
+
         yield "data: [DONE]\n\n"
 
     return StreamingResponse(event_stream(), media_type="text/event-stream")

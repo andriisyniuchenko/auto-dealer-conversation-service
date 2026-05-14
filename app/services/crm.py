@@ -5,6 +5,7 @@ from app.schemas.lead import LeadFormData
 
 _HEADERS = {"X-API-Key": settings.crm_api_key}
 _LEADS_URL = f"{settings.crm_api_url}/api/v1/leads/public"
+_CHAT_SESSIONS_URL = f"{settings.crm_api_url}/api/v1/chat/sessions"
 
 
 async def submit_lead(form: LeadFormData) -> bool:
@@ -43,6 +44,16 @@ async def submit_lead_from_chat(
     try:
         async with httpx.AsyncClient(timeout=5.0) as client:
             response = await client.post(_LEADS_URL, json=payload, headers=_HEADERS)
+            return response.is_success
+    except httpx.HTTPError:
+        return False
+
+
+async def save_chat_session(session_id: str, messages: list[dict]) -> bool:
+    payload = {"session_id": session_id, "messages": messages}
+    try:
+        async with httpx.AsyncClient(timeout=5.0) as client:
+            response = await client.post(_CHAT_SESSIONS_URL, json=payload, headers=_HEADERS)
             return response.is_success
     except httpx.HTTPError:
         return False
