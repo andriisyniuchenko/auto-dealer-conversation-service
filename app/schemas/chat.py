@@ -13,15 +13,9 @@ class ChatMessageRequest(BaseModel):
     message: str
 
 
-class ChatMessageResponse(BaseModel):
-    session_id: str
-    message_id: str
-
-
 class ChatHistoryItem(BaseModel):
     role: str
     content: str
-    created_at: datetime
 
 
 class ChatHistoryResponse(BaseModel):
