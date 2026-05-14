@@ -6,13 +6,13 @@ services:
     env_file: .env
     environment:
       - DATABASE_URL=postgresql+psycopg2://postgres:postgres@postgres:5432/web_db
-      - CHROMA_HOST=chromadb
-      - CHROMA_PORT=8000
+      - OPENSEARCH_URL=http://opensearch:9200
       - CRM_API_URL=http://host.docker.internal:8000
       - CRM_API_KEY=${CRM_API_KEY}
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
     depends_on:
       - postgres
-      - chromadb
+      - opensearch
     volumes:
       - .:/app
 
@@ -27,16 +27,20 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  chromadb:
-    image: chromadb/chroma
+  opensearch:
+    image: opensearchproject/opensearch:2.13.0
+    environment:
+      - discovery.type=single-node
+      - DISABLE_SECURITY_PLUGIN=true
+      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
     ports:
-      - "8002:8000"
+      - "9200:9200"
     volumes:
-      - chroma_data:/chroma/chroma
+      - opensearch_data:/usr/share/opensearch/data
 
 volumes:
   postgres_data:
-  chroma_data:
+  opensearch_data:
 
 networks:
   default:

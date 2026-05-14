@@ -2,7 +2,8 @@ import json
 import os
 import sys
 
-import chromadb
+import requests
+from opensearchpy import OpenSearch, helpers
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -14,20 +15,50 @@ from app.models.vehicle import Vehicle
 _engine = create_engine(settings.database_url)
 SessionLocal = sessionmaker(bind=_engine)
 
-CHROMA_HOST = os.getenv("CHROMA_HOST", "localhost")
-CHROMA_PORT = int(os.getenv("CHROMA_PORT", 8000))
 INVENTORY_PATH = os.path.join(os.path.dirname(__file__), "../app/data/inventory.json")
+OPENSEARCH_INDEX = "vehicles"
+EMBEDDING_MODEL = "nomic-embed-text"
+EMBEDDING_DIM = 768
+
+INDEX_MAPPING = {
+    "settings": {"index": {"knn": True}},
+    "mappings": {
+        "properties": {
+            "vector": {"type": "knn_vector", "dimension": EMBEDDING_DIM},
+            "text": {"type": "text"},
+            "vehicle_id": {"type": "keyword"},
+            "make": {"type": "keyword"},
+            "model": {"type": "keyword"},
+            "condition": {"type": "keyword"},
+            "year": {"type": "integer"},
+            "price": {"type": "float"},
+            "mileage": {"type": "integer"},
+            "type": {"type": "keyword"},
+        }
+    },
+}
 
 
-def build_chroma_document(car: dict) -> str:
+def build_document_text(car: dict) -> str:
     features = ", ".join(car.get("features", []))
+    trim = f" {car['trim']}" if car.get("trim") else ""
     return (
-        f"{car['year']} {car['make']} {car['model']}, "
-        f"{car['type']}, {car['transmission']}, "
+        f"{car['year']} {car['make']} {car['model']}{trim}, "
+        f"{car['condition']} {car['type']}, {car['transmission']}, "
         f"{car['mileage']} miles, ${car['price']}, "
         f"color: {car['color']}, engine: {car['engine']}, "
         f"origin: {car['origin']}, features: {features}"
     )
+
+
+def get_embedding(text: str) -> list[float]:
+    response = requests.post(
+        f"{settings.ollama_base_url}/api/embed",
+        json={"model": EMBEDDING_MODEL, "input": text},
+        timeout=30,
+    )
+    response.raise_for_status()
+    return response.json()["embeddings"][0]
 
 
 def seed_postgres(inventory: list):
@@ -62,26 +93,44 @@ def seed_postgres(inventory: list):
         db.close()
 
 
-def seed_chromadb(inventory: list):
-    client = chromadb.HttpClient(host=CHROMA_HOST, port=CHROMA_PORT)
-    collection = client.get_or_create_collection("inventory")
-    collection.upsert(
-        documents=[build_chroma_document(v) for v in inventory],
-        ids=[v["id"] for v in inventory],
-        metadatas=[
-            {
+def seed_opensearch(inventory: list):
+    client = OpenSearch(settings.opensearch_url)
+
+    if client.indices.exists(index=OPENSEARCH_INDEX):
+        client.indices.delete(index=OPENSEARCH_INDEX)
+    client.indices.create(index=OPENSEARCH_INDEX, body=INDEX_MAPPING)
+    print(f"OpenSearch: created index '{OPENSEARCH_INDEX}'.")
+
+    actions = []
+    for i, v in enumerate(inventory):
+        text = build_document_text(v)
+        try:
+            vector = get_embedding(text)
+        except Exception as e:
+            print(f"  Embedding failed for vehicle {v['id']}: {e}")
+            continue
+
+        actions.append({
+            "_index": OPENSEARCH_INDEX,
+            "_id": v["id"],
+            "_source": {
+                "vector": vector,
+                "text": text,
+                "vehicle_id": v["id"],
                 "make": v["make"],
                 "model": v["model"],
+                "condition": v["condition"],
                 "year": v["year"],
                 "price": v["price"],
                 "mileage": v["mileage"],
-                "origin": v["origin"],
                 "type": v["type"],
-            }
-            for v in inventory
-        ],
-    )
-    print(f"ChromaDB: seeded {len(inventory)} vehicles.")
+            },
+        })
+        print(f"  Embedded {i + 1}/{len(inventory)}: {v['year']} {v['make']} {v['model']}")
+
+    if actions:
+        helpers.bulk(client, actions)
+        print(f"OpenSearch: indexed {len(actions)} vehicles.")
 
 
 if __name__ == "__main__":
@@ -89,4 +138,4 @@ if __name__ == "__main__":
         inventory = json.load(f)
 
     seed_postgres(inventory)
-    seed_chromadb(inventory)
+    seed_opensearch(inventory)

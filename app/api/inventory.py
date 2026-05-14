@@ -15,7 +15,10 @@ STATIC_DIR = "app/static/img"
 
 
 def _get_vehicle_image(vehicle: Vehicle) -> str:
-    base_model = vehicle.model.split()[0].lower()
+    parts = vehicle.model.split()
+    if not parts:
+        return None
+    base_model = parts[0].lower()
     model_dir = os.path.join(STATIC_DIR, "models", base_model)
     if os.path.isdir(model_dir):
         for ext in ("jpg", "jpeg", "png", "webp"):
@@ -98,6 +101,8 @@ async def _build_filter_data(db: AsyncSession) -> str:
     data: dict = {"new": {}, "used": {}}
     years_by_condition: dict = {"new": set(), "used": set()}
     for cond, v_make, v_model, v_year in rows_result.all():
+        if cond not in data:
+            continue
         if v_make not in data[cond]:
             data[cond][v_make] = {"models": [], "years": []}
         if v_model not in data[cond][v_make]["models"]:
