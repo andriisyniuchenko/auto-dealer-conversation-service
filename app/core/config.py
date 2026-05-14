@@ -10,7 +10,7 @@ class Settings(BaseSettings):
 
     llm_provider: str = "groq"
     llm_model: str = "llama-3.3-70b-versatile"
-    groq_api_key: str
+    groq_api_key: str = ""
 
     langsmith_tracing: bool = False
     langsmith_api_key: str = ""
