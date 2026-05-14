@@ -2,7 +2,7 @@ import json
 import os
 import sys
 
-import requests
+from langchain_ollama import OllamaEmbeddings
 from opensearchpy import OpenSearch, helpers
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -17,8 +17,12 @@ SessionLocal = sessionmaker(bind=_engine)
 
 INVENTORY_PATH = os.path.join(os.path.dirname(__file__), "../app/data/inventory.json")
 OPENSEARCH_INDEX = "vehicles"
-EMBEDDING_MODEL = "nomic-embed-text"
 EMBEDDING_DIM = 768
+
+_embeddings = OllamaEmbeddings(
+    model=settings.embedding_model,
+    base_url=settings.ollama_base_url,
+)
 
 INDEX_MAPPING = {
     "settings": {"index": {"knn": True}},
@@ -52,13 +56,7 @@ def build_document_text(car: dict) -> str:
 
 
 def get_embedding(text: str) -> list[float]:
-    response = requests.post(
-        f"{settings.ollama_base_url}/api/embed",
-        json={"model": EMBEDDING_MODEL, "input": text},
-        timeout=30,
-    )
-    response.raise_for_status()
-    return response.json()["embeddings"][0]
+    return _embeddings.embed_query(text)
 
 
 def seed_postgres(inventory: list):

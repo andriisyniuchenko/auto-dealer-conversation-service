@@ -5,6 +5,7 @@ class Settings(BaseSettings):
     database_url: str
     opensearch_url: str = "http://localhost:9200"
     ollama_base_url: str = "http://localhost:11434"
+    embedding_model: str = "nomic-embed-text"
     crm_api_url: str
     crm_api_key: str
 
