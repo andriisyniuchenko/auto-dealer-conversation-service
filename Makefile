@@ -16,9 +16,6 @@ migration:
 	alembic revision --autogenerate -m "$(msg)"
 
 demo:
-	@echo "⚠️  Make sure Ollama is running locally with nomic-embed-text pulled:"
-	@echo "    ollama pull nomic-embed-text"
-	@echo ""
 	docker-compose up -d postgres opensearch
 	sleep 10
 	docker-compose run --rm --build web alembic upgrade head

@@ -1,11 +1,21 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, Request
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
+from app.agent.graph import build_graph
 from app.api.routes import router
 
-app = FastAPI(title="Auto Dealer Conversation Service")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    app.state.graph = build_graph()
+    yield
+
+
+app = FastAPI(title="Auto Dealer Conversation Service", lifespan=lifespan)
 
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
