@@ -8,5 +8,5 @@ def get_llm() -> BaseChatModel:
     return init_chat_model(
         settings.llm_model,
         model_provider=settings.llm_provider,
-        temperature=0.7,
+        temperature=0,
     )

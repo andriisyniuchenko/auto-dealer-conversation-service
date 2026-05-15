@@ -52,10 +52,15 @@ async def submit_lead_from_chat(
 
 
 async def save_chat_session(session_id: str, messages: list[dict], lead_id: int | None = None) -> bool:
+    import logging
+    logger = logging.getLogger(__name__)
     payload = {"session_id": session_id, "messages": messages, "lead_id": lead_id}
     try:
         async with httpx.AsyncClient(timeout=5.0) as client:
             response = await client.post(_CHAT_SESSIONS_URL, json=payload, headers=_HEADERS)
+            if not response.is_success:
+                logger.error("save_chat_session failed: %s %s", response.status_code, response.text)
             return response.is_success
-    except httpx.HTTPError:
+    except httpx.HTTPError as e:
+        logger.error("save_chat_session HTTP error: %s", e)
         return False

@@ -1,3 +1,4 @@
+import asyncio
 import json
 import logging
 import uuid
@@ -27,6 +28,7 @@ async def create_session():
 @router.post("/message")
 async def send_message(body: ChatMessageRequest, graph=Depends(get_graph)):
     config = {"configurable": {"thread_id": body.session_id}}
+    session_id = body.session_id
 
     async def event_stream():
         try:
@@ -48,7 +50,7 @@ async def send_message(body: ChatMessageRequest, graph=Depends(get_graph)):
                     if msg.type in ("human", "ai") and msg.content and msg.content != "__greet__"
                 ]
                 crm_lead_id = snapshot.values.get("crm_lead_id")
-                await save_chat_session(body.session_id, messages, lead_id=crm_lead_id)
+                asyncio.create_task(save_chat_session(session_id, messages, lead_id=crm_lead_id))
                 yield f"data: {json.dumps({'event': 'lead_submitted'})}\n\n"
         except Exception as e:
             logger.exception("Error in chat stream: %s", e)
