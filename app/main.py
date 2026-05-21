@@ -3,16 +3,26 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
+from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.agent.graph import build_graph
 from app.api.routes import router
+from app.core.config import settings
+
+
+def _checkpoint_url() -> str:
+    return settings.database_url.replace("postgresql+psycopg2://", "postgresql://").replace(
+        "postgresql+asyncpg://", "postgresql://"
+    )
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    app.state.graph = build_graph()
-    yield
+    async with AsyncPostgresSaver.from_conn_string(_checkpoint_url()) as checkpointer:
+        await checkpointer.setup()
+        app.state.graph = build_graph(checkpointer)
+        yield
 
 
 app = FastAPI(title="Auto Dealer Conversation Service", lifespan=lifespan)
