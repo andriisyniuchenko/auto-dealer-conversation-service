@@ -51,6 +51,20 @@ async def submit_lead_from_chat(
         return None
 
 
+async def book_appointment(lead_id: int, appointment_at: str, notes: str | None = None) -> bool:
+    payload = {"lead_id": lead_id, "appointment_at": appointment_at, "notes": notes}
+    try:
+        async with httpx.AsyncClient(timeout=5.0) as client:
+            response = await client.post(
+                f"{settings.crm_api_url}/api/v1/leads/public/appointments",
+                json=payload,
+                headers=_HEADERS,
+            )
+            return response.is_success
+    except httpx.HTTPError:
+        return False
+
+
 async def save_chat_session(session_id: str, messages: list[dict], lead_id: int | None = None) -> bool:
     import logging
     logger = logging.getLogger(__name__)

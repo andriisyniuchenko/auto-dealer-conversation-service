@@ -1,4 +1,7 @@
+import logging
 from contextlib import asynccontextmanager
+
+logging.basicConfig(level=logging.INFO)
 
 from fastapi import FastAPI, Request
 from fastapi.responses import RedirectResponse

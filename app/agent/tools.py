@@ -21,6 +21,23 @@ async def search_vehicles(query: str) -> str:
 
 
 @tool
+async def close_chat() -> str:
+    """Close the chat session after the conversation is complete. Call this after saying goodbye to the customer."""
+    return "chat_closed"
+
+
+@tool
+async def book_appointment(lead_id: int, appointment_at: str, notes: str = "") -> str:
+    """Book a test drive or appointment for a customer who has already submitted their details.
+    appointment_at must be an ISO 8601 datetime string, e.g. '2026-05-23T14:00:00'.
+    """
+    ok = await crm.book_appointment(lead_id, appointment_at, notes or None)
+    if ok:
+        return f"Appointment booked for lead_id={lead_id} at {appointment_at}."
+    return "Failed to book the appointment. Please try again."
+
+
+@tool
 async def submit_lead(
     first_name: str,
     last_name: str,

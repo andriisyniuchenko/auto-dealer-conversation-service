@@ -102,7 +102,8 @@
         if (parsed.token) {
           bubble.textContent += parsed.token;
           messages.scrollTop = messages.scrollHeight;
-        } else if (parsed.event === "lead_submitted") {
+        } else if (parsed.event === "chat_complete") {
+          sessionStorage.removeItem(SESSION_KEY);
           closeLead();
         } else if (parsed.event === "error") {
           bubble.textContent = "I'm sorry, something went wrong. Please try again or call us directly.";

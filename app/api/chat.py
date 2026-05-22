@@ -43,15 +43,32 @@ async def send_message(body: ChatMessageRequest, graph=Depends(get_graph)):
                         yield f"data: {json.dumps({'token': chunk.content})}\n\n"
 
             snapshot = await graph.aget_state(config)
-            if snapshot.values.get("lead_submitted"):
+            state_vals = snapshot.values
+            logger.info(
+                "State after stream: lead_submitted=%s appointment_booked=%s chat_complete=%s",
+                state_vals.get("lead_submitted"),
+                state_vals.get("appointment_booked"),
+                state_vals.get("chat_complete"),
+            )
+            all_msgs = state_vals.get("messages", [])
+            if state_vals.get("lead_submitted"):
                 messages = [
                     {"role": "user" if msg.type == "human" else "assistant", "content": msg.content}
-                    for msg in snapshot.values.get("messages", [])
+                    for msg in all_msgs
                     if msg.type in ("human", "ai") and msg.content and msg.content != "__greet__"
                 ]
-                crm_lead_id = snapshot.values.get("crm_lead_id")
+                crm_lead_id = state_vals.get("crm_lead_id")
                 asyncio.create_task(save_chat_session(session_id, messages, lead_id=crm_lead_id))
-                yield f"data: {json.dumps({'event': 'lead_submitted'})}\n\n"
+            appointment_done = any(
+                getattr(m, "name", None) == "book_appointment" and "Appointment booked" in (m.content or "")
+                for m in all_msgs[-10:]
+            )
+            chat_closed = any(
+                getattr(m, "name", None) == "close_chat"
+                for m in all_msgs[-5:]
+            )
+            if state_vals.get("chat_complete") or appointment_done or chat_closed:
+                yield f"data: {json.dumps({'event': 'chat_complete'})}\n\n"
         except Exception as e:
             logger.exception("Error in chat stream: %s", e)
             yield f"data: {json.dumps({'event': 'error'})}\n\n"
