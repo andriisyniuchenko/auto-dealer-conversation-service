@@ -30,13 +30,18 @@ def get_tool_node() -> ToolNode:
 async def agent_node(state: State) -> dict:
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     date_hint = f" Today's date is {today}. When the customer gives a time like '5:30 pm', use it as-is with today's date in ISO 8601 format (e.g. {today}T17:30:00)."
-    if state.get("lead_submitted"):
-        crm_lead_id = state.get("crm_lead_id")
+    if state.get("appointment_booked"):
         system = SystemMessage(
             content=SYSTEM_MESSAGE.content
             + date_hint
             + " Customer details have already been passed to the team — do not submit again."
-            + (f" Use lead_id={crm_lead_id} when calling book_appointment." if crm_lead_id else "")
+            + " The test drive appointment has been booked — say goodbye warmly and CALL close_chat now."
+        )
+    elif state.get("lead_submitted"):
+        system = SystemMessage(
+            content=SYSTEM_MESSAGE.content
+            + date_hint
+            + " Customer details have already been passed to the team — do not submit again."
         )
     else:
         system = SystemMessage(content=SYSTEM_MESSAGE.content + date_hint)
@@ -82,12 +87,24 @@ async def track_lead_node(state: State) -> dict:
 
 
 async def track_appointment_node(state: State) -> dict:
-    tool_msg = next(
-        (m for m in reversed(state["messages"]) if getattr(m, "name", None) == "book_appointment"),
-        None,
-    )
-    if tool_msg and "Appointment booked" in tool_msg.content:
-        return {"appointment_booked": True, "chat_complete": True}
+    crm_lead_id = state.get("crm_lead_id")
+    if not crm_lead_id:
+        return {}
+    for msg in reversed(state["messages"]):
+        if not getattr(msg, "tool_calls", None):
+            continue
+        for tc in msg.tool_calls:
+            if tc["name"] != "book_appointment":
+                continue
+            appointment_at = tc["args"].get("appointment_at")
+            notes = tc["args"].get("notes") or None
+            if not appointment_at:
+                return {}
+            from app.services.crm import book_appointment as crm_book
+            ok = await crm_book(crm_lead_id, appointment_at, notes)
+            if ok:
+                return {"appointment_booked": True, "chat_complete": True}
+            return {}
     return {}
 
 

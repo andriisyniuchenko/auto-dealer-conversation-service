@@ -60,14 +60,24 @@ async def send_message(body: ChatMessageRequest, graph=Depends(get_graph)):
                 crm_lead_id = state_vals.get("crm_lead_id")
                 asyncio.create_task(save_chat_session(session_id, messages, lead_id=crm_lead_id))
             appointment_done = any(
-                getattr(m, "name", None) == "book_appointment" and "Appointment booked" in (m.content or "")
+                getattr(m, "name", None) == "book_appointment" and "Appointment scheduled" in (m.content or "")
                 for m in all_msgs[-10:]
             )
             chat_closed = any(
                 getattr(m, "name", None) == "close_chat"
                 for m in all_msgs[-5:]
             )
-            if state_vals.get("chat_complete") or appointment_done or chat_closed:
+            farewell_words = ("goodbye", "bye", "see you", "take care", "have a great", "have a good", "talk soon")
+            last_ai = next(
+                (m for m in reversed(all_msgs) if m.type == "ai" and m.content),
+                None,
+            )
+            farewell_said = (
+                (state_vals.get("lead_submitted") or state_vals.get("appointment_booked"))
+                and last_ai is not None
+                and any(w in last_ai.content.lower() for w in farewell_words)
+            )
+            if state_vals.get("chat_complete") or appointment_done or chat_closed or farewell_said:
                 yield f"data: {json.dumps({'event': 'chat_complete'})}\n\n"
         except Exception as e:
             logger.exception("Error in chat stream: %s", e)

@@ -27,14 +27,11 @@ async def close_chat() -> str:
 
 
 @tool
-async def book_appointment(lead_id: int, appointment_at: str, notes: str = "") -> str:
-    """Book a test drive or appointment for a customer who has already submitted their details.
+async def book_appointment(appointment_at: str, notes: str = "") -> str:
+    """Schedule a test drive or appointment for the customer.
     appointment_at must be an ISO 8601 datetime string, e.g. '2026-05-23T14:00:00'.
     """
-    ok = await crm.book_appointment(lead_id, appointment_at, notes or None)
-    if ok:
-        return f"Appointment booked for lead_id={lead_id} at {appointment_at}."
-    return "Failed to book the appointment. Please try again."
+    return f"Appointment scheduled for {appointment_at}."
 
 
 @tool

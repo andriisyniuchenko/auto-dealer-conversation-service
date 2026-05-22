@@ -13,10 +13,17 @@
   let isStreaming = false;
 
   toggle.addEventListener("click", async () => {
+    const opening = widget.classList.contains("d-none");
     widget.classList.toggle("d-none");
-    if (!widget.classList.contains("d-none") && !sessionId) {
+    if (opening && !sessionId) {
       await initSession();
       await sendGreeting();
+    } else if (!opening) {
+      sessionStorage.removeItem(SESSION_KEY);
+      sessionId = null;
+      messages.innerHTML = "";
+      closedMsg.classList.add("d-none");
+      footer.classList.remove("d-none");
     }
   });
 
