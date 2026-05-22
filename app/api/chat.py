@@ -30,6 +30,11 @@ async def send_message(body: ChatMessageRequest, graph=Depends(get_graph)):
     config = {"configurable": {"thread_id": body.session_id}}
     session_id = body.session_id
 
+    _DETERMINISTIC_NODES = {
+        "greet", "ask_name", "extract_name", "extract_phone",
+        "ask_test_drive", "ask_datetime", "farewell",
+    }
+
     async def event_stream():
         try:
             async for event in graph.astream_events(
@@ -38,9 +43,19 @@ async def send_message(body: ChatMessageRequest, graph=Depends(get_graph)):
                 version="v2",
             ):
                 if event["event"] == "on_chat_model_stream":
-                    chunk = event["data"]["chunk"]
-                    if chunk.content:
-                        yield f"data: {json.dumps({'token': chunk.content})}\n\n"
+                    if event.get("metadata", {}).get("langgraph_node") == "agent":
+                        chunk = event["data"]["chunk"]
+                        if chunk.content:
+                            yield f"data: {json.dumps({'token': chunk.content})}\n\n"
+                elif event["event"] == "on_chain_end":
+                    node = event.get("metadata", {}).get("langgraph_node", "")
+                    if node in _DETERMINISTIC_NODES:
+                        output = event.get("data", {}).get("output", {})
+                        if isinstance(output, dict):
+                            for msg in output.get("messages", []):
+                                content = getattr(msg, "content", "")
+                                if content:
+                                    yield f"data: {json.dumps({'token': content})}\n\n"
 
             snapshot = await graph.aget_state(config)
             state_vals = snapshot.values
@@ -59,25 +74,7 @@ async def send_message(body: ChatMessageRequest, graph=Depends(get_graph)):
                 ]
                 crm_lead_id = state_vals.get("crm_lead_id")
                 asyncio.create_task(save_chat_session(session_id, messages, lead_id=crm_lead_id))
-            appointment_done = any(
-                getattr(m, "name", None) == "book_appointment" and "Appointment scheduled" in (m.content or "")
-                for m in all_msgs[-10:]
-            )
-            chat_closed = any(
-                getattr(m, "name", None) == "close_chat"
-                for m in all_msgs[-5:]
-            )
-            farewell_words = ("goodbye", "bye", "see you", "take care", "have a great", "have a good", "talk soon")
-            last_ai = next(
-                (m for m in reversed(all_msgs) if m.type == "ai" and m.content),
-                None,
-            )
-            farewell_said = (
-                (state_vals.get("lead_submitted") or state_vals.get("appointment_booked"))
-                and last_ai is not None
-                and any(w in last_ai.content.lower() for w in farewell_words)
-            )
-            if state_vals.get("chat_complete") or appointment_done or chat_closed or farewell_said:
+            if state_vals.get("chat_complete"):
                 yield f"data: {json.dumps({'event': 'chat_complete'})}\n\n"
         except Exception as e:
             logger.exception("Error in chat stream: %s", e)

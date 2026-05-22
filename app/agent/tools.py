@@ -1,6 +1,6 @@
 from langchain_core.tools import tool
 
-from app.services import crm, opensearch
+from app.services import opensearch
 
 
 @tool
@@ -21,37 +21,6 @@ async def search_vehicles(query: str) -> str:
 
 
 @tool
-async def close_chat() -> str:
-    """Close the chat session after the conversation is complete. Call this after saying goodbye to the customer."""
-    return "chat_closed"
-
-
-@tool
-async def book_appointment(appointment_at: str, notes: str = "") -> str:
-    """Schedule a test drive or appointment for the customer.
-    appointment_at must be an ISO 8601 datetime string, e.g. '2026-05-23T14:00:00'.
-    """
-    return f"Appointment scheduled for {appointment_at}."
-
-
-@tool
-async def submit_lead(
-    first_name: str,
-    last_name: str,
-    phone: str,
-    interest: str,
-    email: str = "",
-    notes: str = "",
-) -> str:
-    """Submit a customer lead to the CRM when they want to be contacted by a sales rep."""
-    lead_id = await crm.submit_lead_from_chat(
-        first_name=first_name,
-        last_name=last_name,
-        phone=phone,
-        interest=interest,
-        email=email or None,
-        notes=notes or None,
-    )
-    if lead_id:
-        return f"Lead submitted for {first_name} {last_name}. crm_lead_id={lead_id}"
-    return "Failed to pass customer details. Please try again."
+async def express_interest(vehicle_interest: str) -> str:
+    """Call this when the customer clearly wants to proceed with a specific vehicle — starts contact collection."""
+    return f"Interest noted: {vehicle_interest}"
