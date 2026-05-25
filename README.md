@@ -285,7 +285,10 @@ make freeze                     # Update requirements.txt
 pytest tests/ -v
 ```
 
-15 tests covering inventory routes, filters, 404 handling, and lead form validation. Uses in-memory SQLite — no external services needed.
+52 tests total, split into two areas:
+
+- **Agent logic** (37 tests) — routing functions and deterministic nodes. Covers every state transition in the graph: all `_route_entry` branches, post-tool routing, node outputs, keyword detection. No LLM calls, no external services — runs in under a second.
+- **API and inventory** (15 tests) — route responses, filters, 404 handling, lead form validation. Uses in-memory SQLite.
 
 CI runs on every push via GitHub Actions.
 
